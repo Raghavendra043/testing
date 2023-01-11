@@ -1,41 +1,80 @@
-Client -> React App
-Utilize_task -> Node Application
+# Client-Web
 
-Start the React Application
-Start the Nodejs Application
+This project was generated with [Angular
+CLI](https://github.com/angular/angular-cli) version 12.2.10.
 
-u can generated the Token on button click from React Application,
-other required tasks can be performed by calling the appropriate endpoints
+## Development server
 
-The server has 4 endpoint created and the description for each of them is given below ;
+Run `yarn start` for a dev server. Navigate to `http://localhost:8000/client-citizen`. The app
+will automatically reload if you change any of the source files. To view which
+files are being served visit: http://localhost:8000/webpack-dev-server
 
-    1. /link GET Request ;
+## Running unit tests
 
-    This endpoint is called in the client Side for the user to authorise the
-    subsequent events. this endpoint generates the auth oAuth link which
-    redirects the URL to / login on successful authorization
+Run `yarn test` to execute the unit tests via
+[Karma](https://karma-runner.github.io).
 
-    2. / login  GET Request ;
+## Configurations
 
-    This endpoint generates a token whenever user authorizes from google oAuth2. The link
-    is redicted to this endoint
+There are two different aspects of the app that can be configured:
 
-    3. /spreadsheet/:id   GET Request ;
-    path variables : Sheet ID
+- App config: patient/clinician-mode, fake-native layer, base URL, etc.
+- OIDC config: enabled/disabled, OIDC provider, etc.
 
-    This endpoint fetches the values of all the rows from all the Sheets of the Spreadsheet
-    Sheet ID shopuld be passed mandatorily
+each of these can be changed using the `build.sh` script, for example:
 
-    4. /spreadsheet/update  POST Request ;
-    Request Body : { spreadsheet_id, sheet_id, row_number, column_number, value }
+```
+./build.sh app_config demo
+./build.sh oidc_config auth-zero
+```
 
-    This endpoint updates the cell representing the row and column of the particular\
-    sheet in the Spreadsheet
+where:
 
-    **** Error handelling is done at all the required positions ****
+- the argument given to `app_config` corresponds to one of the names in the
+  `config/app` folder, which contains the different variations of the
+  `app.config.json` file,
+- the argument given to `oidc_config` corresponds to one of the names in the
+  `config/oidc` folder, which contains the different variations of the
+  `oidc.config.json` file.
 
-    Flow :
+If a new config file needs to be added, it is simply added to the appropriate
+folder.
 
-    first /link endpoint should be called
+Finally, there is also a single config inside `src/main.ts`:
 
-    and 3 and 4 API endpoints can be called as in when required
+    const production = true;
+
+This flag unfortunately can't be set via any of the other methods as `main.ts`
+is loaded as the first thing by the application. Explanation of the flag can be
+found here: https://angular.io/api/core/enableProdMode
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular
+CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Using Angular CLI (ng) to auto generate:
+
+Creating a module (login.module.ts with routing):
+
+    ng g m components/login --routing
+
+Creating a component (creates login component in the login folder and adds to module):
+
+    ng g c -m login components/login/login
+
+For questionnaire nodes:
+
+    ng g c -m questionnaire-nodes components/questionnaire-nodes/manual/bloodPressureManualDeviceNode
+
+Creating a service (some-service.ts)
+
+    ng g s services/someService
+
+Creating a directive (thread.directive.ts):
+
+    ng g d directives/thread
+
+Creating a pipe (clickable-links.pipe.ts):
+
+    ng g p pipes/clickableLinks
