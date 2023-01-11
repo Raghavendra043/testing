@@ -1,0 +1,64 @@
+<form [formGroup]="nodeForm" (ngSubmit)="onSubmit()">
+  <div class="center-div">
+    <h2 class="line-wrap text-element">{{ node.text! | translate }}</h2>
+  </div>
+
+  <fieldset class="questionnaire-fields">
+    <div class="block">
+      <label for="blood-pressure-systolic">
+        {{ "BLOOD_PRESSURE_SYSTOLIC" | translate }}
+      </label>
+      <input
+        id="blood-pressure-systolic"
+        type="number"
+        name="blood-pressure-systolic"
+        focusOnLoad
+        [ngClass]="{ warning: isOffendingValue('systolic') }"
+        formControlName="systolic" />
+      <span
+        id="blood-pressure-systolic-warning"
+        *ngIf="isOffendingValue('systolic')"
+        class="warning"
+        >{{ "VALUE_INCORRECT_WARNING" | translate }}</span
+      >
+    </div>
+
+    <div class="block">
+      <label for="blood-pressure-diastolic">
+        {{ "BLOOD_PRESSURE_DIASTOLIC" | translate }}
+      </label>
+
+      <input
+        id="blood-pressure-diastolic"
+        type="number"
+        name="blood-pressure-diastolic"
+        [ngClass]="{ warning: isOffendingValue('diastolic') }"
+        formControlName="diastolic" />
+      <span
+        id="blood-pressure-diastolic-warning"
+        *ngIf="isOffendingValue('diastolic')"
+        class="warning"
+        >{{ "VALUE_INCORRECT_WARNING" | translate }}</span
+      >
+    </div>
+
+    <div class="block">
+      <label for="blood-pressure-pulse">
+        {{ "BLOOD_PRESSURE_PULSE" | translate }}
+      </label>
+
+      <input
+        id="blood-pressure-pulse"
+        type="number"
+        name="blood-pressure-pulse"
+        [ngClass]="{ warning: isOffendingValue('pulse') }"
+        formControlName="pulse" />
+      <span
+        id="blood-pressure-pulse-warning"
+        *ngIf="isOffendingValue('pulse')"
+        class="warning"
+        >{{ "VALUE_INCORRECT_WARNING" | translate }}</span
+      >
+    </div>
+  </fieldset>
+</form>

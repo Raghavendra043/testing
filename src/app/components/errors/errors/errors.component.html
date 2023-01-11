@@ -1,0 +1,16 @@
+<div class="container">
+  <header-menu [title]="'ERROR_TITLE'"></header-menu>
+
+  <div class="content questionnaire_content">
+    <h2>{{ model.description | translate }}</h2>
+  </div>
+
+  <div class="flex-column">
+    <button
+      id="ok-button"
+      class="footer-button center-button"
+      (click)="leaveErrorPage()">
+      {{ "OK" | translate }}
+    </button>
+  </div>
+</div>

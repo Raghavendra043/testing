@@ -1,0 +1,266 @@
+.message {
+  position: relative;
+  margin-top: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 5%;
+  border-radius: 0.5em;
+  .apply-subtle-shadow();
+
+  .message_header {
+    margin-top: 5px;
+    margin-left: 5px;
+    line-height: 1.2em;
+    font-size: 0.75em;
+    margin-left: 3%;
+  }
+
+  p {
+    line-height: 1.2em;
+    margin-top: 0px;
+    padding-bottom: 1%;
+    word-break: break-word;
+    hyphens: auto;
+
+    a {
+      text-decoration: underline;
+    }
+  }
+}
+
+.from_clinician {
+  margin-left: 1em;
+  background-color: @message-from-clinician-background-color;
+  color: @message-from-clinician-text-color;
+  background-image: url(../images/clinician.svg);
+  background-repeat: no-repeat;
+  background-position: right 3% bottom -5px;
+  width: 80%;
+
+  p {
+    margin-left: 1em;
+  }
+
+  .message_header {
+    color: darken(@message-from-clinician-text-color, 10%);
+  }
+}
+
+.from_patient {
+  margin-right: 1em;
+  background-color: @message-from-patient-background-color;
+  color: @message-from-patient-text-color;
+  width: 80%;
+
+  p {
+    margin-right: 5%;
+    margin-left: 3%;
+  }
+
+  .message_header {
+    color: darken(@message-from-patient-text-color, 10%);
+  }
+}
+
+#messages {
+  padding-bottom: 2em;
+  flex-grow: 20;
+}
+
+div#char-count {
+  padding-bottom: 0.2em;
+  padding-left: 0.2em;
+  background-color: @neutral-color;
+
+  span {
+    color: lighten(@header-color, 20%);
+  }
+}
+
+.thread-image {
+  border: 2px solid rgba(0, 0, 0, 20%);
+  background-color: #ffffff;
+  background-clip: padding-box;
+  border-radius: 0.5em;
+  max-width: ~"calc(100% - 2em)";
+  max-height: 200vh;
+  margin: 1em 1em 0 1em;
+  cursor: pointer;
+
+  &::last-child {
+    margin-bottom: 1em;
+  }
+}
+
+img.thread-image {
+  .apply-subtle-shadow();
+}
+
+.thread-image-placeholder {
+  height: 6em;
+  width: 8em;
+  background-color: darken(@neutral-color, 10%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 80%);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    margin: 0.5em;
+    width: ~"calc(100% - 1em)";
+    height: ~"calc(100% - 1em)";
+    object-fit: contain;
+  }
+
+  .delete,
+  .confirm-delete {
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+    background-color: @cancel-color;
+    .apply-border(darken(@cancel-color, 10%));
+    color: #ffffff;
+    padding: 0.5em;
+    font-size: large;
+  }
+}
+
+#write_message {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: row;
+  margin: 0px;
+  padding: 0px;
+  background-image: none;
+  background-color: @neutral-color;
+
+  .image-picker-component {
+    display: contents;
+  }
+
+  .image-preview {
+    position: relative;
+    order: -1;
+  }
+
+  textarea {
+    display: block;
+    flex-grow: 3;
+    box-sizing: border-box;
+    resize: none;
+    margin-right: 0.25em;
+    padding: 0.2em;
+    border: 0;
+    background-color: @neutral-color;
+    font-family: "Lato";
+    color: @header-color;
+  }
+
+  .file-upload-label {
+    color: @secondary-color;
+    background-color: @neutral-color;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.3em;
+    justify-content: center;
+    margin-bottom: 0.5em;
+    padding: 0 0.5em;
+  }
+
+  .preview {
+    .apply-border(darken(@neutral-color, 10%));
+    border-radius: 1em;
+    max-height: ~"min(25vh, 10em)";
+    max-width: ~"min(25vw, 10em)";
+    margin-bottom: 0.5em;
+    margin-right: 0.5em;
+  }
+
+  .loading {
+    background-color: darken(@neutral-color, 20%);
+    background-image: url(../images/loader.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  .ellipsis {
+    background-color: darken(@neutral-color, 20%);
+    font-size: 2em;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1em;
+    height: 100%;
+  }
+
+  .close-button {
+    position: absolute;
+    top: -1em;
+    right: 5px;
+    width: 2em;
+    height: 2em;
+    border-radius: 100%;
+    color: white;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  div#send-container {
+    .apply-border(darken(@ok-button-color, 10%));
+
+    display: flex;
+    box-sizing: content-box;
+    margin-bottom: 0.5em;
+    margin-right: 0.5em;
+
+    background-color: @ok-button-color;
+    border-radius: 0.3em;
+
+    font-family: "Lato";
+    font-size: 1.2em;
+
+    .icon {
+      color: @background-color;
+      padding-right: 0.25em;
+    }
+  }
+
+  div#send-container.disabled {
+    border-color: darken(@disabled-button-color, 10%);
+    background-color: @disabled-button-color;
+  }
+
+  #submit {
+    flex-grow: 1;
+
+    display: flex;
+    align-items: center;
+
+    padding-right: 0.5em;
+    border: 0px solid transparent;
+
+    background-color: @ok-button-color;
+    color: @background-color;
+    font-weight: 600;
+  }
+
+  #submit:disabled {
+    border-top-color: darken(@disabled-button-color, 10%);
+    background-color: @disabled-button-color;
+  }
+}

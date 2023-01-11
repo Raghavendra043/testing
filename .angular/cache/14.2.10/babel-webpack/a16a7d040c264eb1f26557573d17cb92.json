@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { StorageVar } from \"@utils/globals/storage-var\";\nexport const OIDC_CONTINUE_WITH_ID = new StorageVar(\"continueWithIdToken\", sessionStorage);\nexport const ROOT_RESOURCE = new StorageVar(\"rootResource\", sessionStorage);\nexport const PINCODE_SET = new StorageVar(\"pincodeSet\", localStorage);","map":null,"metadata":{},"sourceType":"module"}

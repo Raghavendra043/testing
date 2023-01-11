@@ -1,0 +1,57 @@
+.apply-border(@color) {
+  border: 2px solid @color;
+  box-sizing: content-box;
+}
+
+.apply-background-color-and-border(@color) {
+  border: 2px solid darken(@color, 10%);
+  background-color: @color;
+  box-sizing: content-box;
+}
+
+.apply-highlight-animation(@name, @color) {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-name: @name;
+
+  @keyframes @name {
+    to {
+      background-color: darken(@color, 5%);
+    }
+  }
+}
+
+.apply-shadow() {
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+}
+
+.apply-subtle-shadow() {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 4px 8px 0px;
+}
+
+.fill {
+  flex-grow: 1;
+}
+
+.narrow {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fixed_height {
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.margin_bottom {
+  margin-bottom: 1em;
+}
+
+.margin_top {
+  margin-top: 1em;
+}
+
+.space_between {
+  justify-content: space-between !important;
+}

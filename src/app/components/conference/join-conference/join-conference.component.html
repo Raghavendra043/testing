@@ -1,0 +1,21 @@
+<div class="container">
+  <header-menu [title]="'CONFERENCE_TITLE'"></header-menu>
+
+  <div class="content">
+    <div
+      *ngIf="model.state === states.PROMPTED || model.state === states.JOINING">
+      <h2>{{ model.header | translate }}</h2>
+      <h3>{{ model.message | translate }}</h3>
+    </div>
+  </div>
+
+  <div id="footer" class="flex-column" *ngIf="model.state !== states.JOINED">
+    <button
+      id="join-button"
+      class="footer-button center-button"
+      [disabled]="model.state === states.JOINING"
+      (click)="acceptCall()">
+      {{ texts.joinButton | translate }}
+    </button>
+  </div>
+</div>

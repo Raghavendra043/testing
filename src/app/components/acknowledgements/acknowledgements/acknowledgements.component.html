@@ -1,0 +1,23 @@
+<div class="container">
+  <header-menu
+    [showBackBtn]="true"
+    [title]="'ACKNOWLEDGEMENTS_TITLE'"></header-menu>
+
+  <div class="content">
+    <loading-state
+      [stateModel]="model.state"
+      [hasNoData]="model.acknowledgements.length === 0"
+      [noDataMessage]="'ACKNOWLEDGEMENTS_NO_ACKNOWLEDGEMENTS'"
+      [loadingMessage]="'ACKNOWLEDGEMENTS_LOADING'"
+      [failedMessage]="'ACKNOWLEDGEMENTS_FAILED'"></loading-state>
+
+    <div class="acknowledgements_list">
+      <div
+        *ngFor="let acknowledgement of model.acknowledgements"
+        class="acknowledgement_list_item">
+        <i aria-hidden="true" class="icon fas fa-check-circle"></i>
+        <p>{{ acknowledgement.message }}</p>
+      </div>
+    </div>
+  </div>
+</div>

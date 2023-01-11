@@ -1,0 +1,100 @@
+<div class="container">
+  <header-menu
+    [showBackBtn]="true"
+    [showHomeBtn]="true"
+    [title]="model.title"></header-menu>
+
+  <div class="content">
+    <div>
+      <!--  Show confirmation -->
+      <div *ngIf="model.state === sendReplyState.CONFIRM">
+        <h2 id="send-reply-text">{{ "END_QUESTION_TEXT" | translate }}</h2>
+      </div>
+
+      <!--  Uploading -->
+      <div
+        class="send-reply-uploading"
+        *ngIf="model.state === sendReplyState.UPLOADING">
+        <h2>{{ "UPLOADING_WAIT_TEXT" | translate }}</h2>
+      </div>
+
+      <!--  Uploaded -->
+      <div
+        class="send-reply-uploaded"
+        *ngIf="model.state === sendReplyState.ACKNOWLEDGE">
+        <h2 id="send-reply-ack-text">
+          {{ "SEND_REPLIES_ACK_TEXT" | translate }}
+        </h2>
+      </div>
+
+      <!--  Upload failed -->
+      <div
+        class="send-reply-failed"
+        *ngIf="model.state === sendReplyState.FAILED">
+        <h2 id="send-reply-failed-text" class="text-center error-message">
+          {{ "UPLOAD_FAILED_TEXT" | translate }}
+        </h2>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer" class="flex-column">
+    <!--  Show confirmation -->
+    <button
+      id="question-left-button"
+      class="footer-button left-button"
+      *ngIf="model.state === sendReplyState.CONFIRM"
+      (click)="skipSendClick()">
+      {{ "NO" | translate }}
+      <i aria-hidden="true" class="icon fas fa-times-circle"></i>
+    </button>
+
+    <button
+      id="question-right-button"
+      class="footer-button right-button"
+      *ngIf="model.state === sendReplyState.CONFIRM"
+      (click)="sendClick()">
+      {{ "YES" | translate }}
+      <i aria-hidden="true" class="icon fas fa-check-circle"></i>
+    </button>
+
+    <!--  Uploading -->
+    <button
+      id="question-center-button"
+      class="footer-button center-button"
+      *ngIf="model.state === sendReplyState.UPLOADING"
+      disabled="disabled">
+      {{ "OK" | translate }}
+      <i aria-hidden="true" class="icon fas fa-check-circle"></i>
+    </button>
+
+    <!--  Uploaded -->
+    <button
+      id="question-center-button"
+      class="footer-button center-button"
+      *ngIf="model.state === sendReplyState.ACKNOWLEDGE"
+      (click)="ackOkClick()">
+      {{ "OK" | translate }}
+      <i aria-hidden="true" class="icon fas fa-check-circle"></i>
+    </button>
+
+    <!--  Upload failed -->
+    <button
+      id="cancel-retry-button"
+      class="footer-button left-button"
+      *ngIf="model.state === sendReplyState.FAILED"
+      (click)="cancelRetryClick()">
+      {{ "CANCEL" | translate }}
+      <i aria-hidden="true" class="icon fas fa-times-circle"></i>
+    </button>
+
+    <button
+      id="retry-button"
+      class="footer-button right-button"
+      *ngIf="model.state === sendReplyState.FAILED"
+      (click)="sendClick()">
+      {{ "RETRY" | translate }}
+      <i aria-hidden="true" class="icon fas fa-check-circle"></i>
+    </button>
+  </div>
+</div>

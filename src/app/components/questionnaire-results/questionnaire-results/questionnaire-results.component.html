@@ -1,0 +1,48 @@
+<div class="container">
+  <header-menu
+    [showBackBtn]="true"
+    [title]="'QUESTIONNAIRE_RESULTS_TITLE'"></header-menu>
+
+  <loading-state
+    [stateModel]="model.state"
+    [hasNoData]="model.questionnaireResults.length === 0"
+    [noDataMessage]="'NO_QUESTIONNAIRE_RESULTS_AVAILABLE'"
+    [loadingMessage]="'QUESTIONNAIRE_RESULTS_LOADING'"
+    [failedMessage]="'QUESTIONNAIRE_RESULTS_FAILED'"></loading-state>
+
+  <nav class="content">
+    <a *ngFor="
+        let questionnaireResultRef of model.questionnaireResults;
+        index as i
+      "
+      (click)="showQuestionnaireResult(questionnaireResultRef, i)"
+      id="{{ questionnaireResultRef.name }} {{
+        questionnaireResultRef.resultDate
+      }}"
+      class="flex_list list_item normal_list_item condensed_list_item">
+      <span>{{ questionnaireResultRef.name | translate }}</span>
+      <span class="result-date">
+        {{ questionnaireResultRef.resultDate | amDateFormat: "lll" }}
+      </span>
+    </a>
+  </nav>
+
+  <div id="footer" class="flex-column">
+    <button
+      id="question-left-button"
+      class="footer-button left-button"
+      [disabled]="!model.pagination?.previous"
+      (click)="previousPage()">
+      {{ "NEWER" | translate }}
+    </button>
+
+    <button
+      id="question-right-button"
+      class="footer-button right-button"
+      type="button"
+      [disabled]="!model.pagination?.next"
+      (click)="nextPage()">
+      {{ "OLDER" | translate }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+{
+  "authorizationEndpoint": "https://demo.identityserver.io/connect/authorize",
+  "endSessionEndpoint": "https://demo.identityserver.io/connect/endsession",
+  "clientId": "implicit",
+  "redirectUri": "http://localhost:8000/app/",
+  "postLogoutRedirectUri": "http://localhost:8000/app/",
+  "invalidateSsoSession": false,
+  "enabled": false
+}

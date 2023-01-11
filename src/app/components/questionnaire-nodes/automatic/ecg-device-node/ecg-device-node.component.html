@@ -1,0 +1,27 @@
+<div class="center-div">
+  <h2 class="line-wrap text-element">
+    {{ nodeModel!.heading! | translate }}
+  </h2>
+</div>
+
+<notifications
+  [info]="nodeModel!.info"
+  [error]="nodeModel!.error"></notifications>
+
+<div class="notification progress" *ngIf="nodeModel?.error === undefined">
+  <i class="notification_icon fas fa-play-circle"></i>
+  <div id="progress-container">
+    <label id="progress-label" *ngIf="nodeModel!.remaining > 60">
+      {{ nodeModel!.remaining / 60 | number: "1.0-0" }}
+      {{ "ECG_MINUTES_LEFT" | translate }}
+    </label>
+    <label id="progress-label" *ngIf="nodeModel!.remaining <= 60">
+      {{ nodeModel!.remaining }} {{ "ECG_SECONDS_LEFT" | translate }}
+    </label>
+
+    <progress
+      id="progress-bar"
+      max="100"
+      value="{{ nodeModel!.progress }}"></progress>
+  </div>
+</div>

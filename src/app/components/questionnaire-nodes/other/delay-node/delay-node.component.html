@@ -1,0 +1,9 @@
+<div class="center-div">
+  <h2 class="line-wrap text-element">{{ nodeModel?.heading }}</h2>
+</div>
+
+<timer
+  [count]="nodeModel?.count"
+  [countUp]="nodeModel?.countUp"
+  [countTime]="nodeModel?.countTime"
+  (timerStoppedChange)="onTimerStopped()"></timer>

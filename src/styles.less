@@ -1,0 +1,100 @@
+/* # Style.less
+ *
+ * This is the main entry point for getting an overview of our
+ * [less](lesscss.org/)-based stylesheets.
+ *
+ * ## portrait.less and landscape.less
+ *
+ * Provide overrides for when the app is used in portrait/landscape mode. It is
+ * often necessary to use the `!important` flag to make sure these changes take
+ * effect.
+ *
+ * ## colors.less
+ *
+ * Contains definitions of the colors used in the app.
+ *
+ * ## base.less
+ *
+ * Contains basic styles and styling of top level elements.
+ *
+ * ## footer.less
+ *
+ * Styling of the footer part of the app.
+ *
+ * ## graphs.less
+ *
+ * Styling of the "my measurements" section of the app.
+ *
+ * ## lists.less
+ *
+ * List play a central role in the app and the styling of lists.
+ *
+ * ## login.less
+ *
+ * Styling of the "log in" and "change password" sections of the app.
+ *
+ * ## messages.less
+ *
+ * Styling of the "messages" section of the app.
+ *
+ * ## mixins.less
+ *
+ * Contains classes for specific behaviours. Like "white" for forcing a white
+ * background color.
+ *
+ * ## notifications.less and popups.less
+ *
+ * Styling of popups and info and error notifications.
+ *
+ * ## Images
+ *
+ * Create images as Scalable Vector Graphics (SVG) files. Svgs handle different
+ * screen sizes way better than PNG's. Inkscape is not great but survivable SVG
+ * editor. SVGs should be minified with https://jakearchibald.github.io/svgomg/
+ * before being committed. If the compression screws up the image try toggling
+ * the "Round/rewrite transform" option.
+ *
+ * Let me stress that again: No. PNGs.
+ */
+
+.splash_screen {
+  background-color: @background-color;
+
+  img {
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%
+  }
+}
+
+@media (max-aspect-ratio: 4/3) {
+  @import "assets/style/portrait";
+}
+
+@media (min-aspect-ratio: 4/3) {
+  @import "assets/style/landscape";
+}
+
+@import "assets/style/mixins";
+@import "assets/style/base";
+@import "assets/style/header";
+
+@font: "Lato";
+@import "assets/style/font/font";
+
+@import "assets/style/lists";
+@import "assets/style/footer";
+@import "assets/style/colors";
+@import "assets/style/graphs";
+@import "assets/style/notifications";
+@import "assets/style/login";
+@import "assets/style/questionnaire";
+@import "assets/style/messages";
+@import "assets/style/popups";
+@import "assets/style/calendar";
+@import "assets/style/bloodsugar";
+@import "assets/style/clinician";
+
+@import "assets/style/fontawesome/all.min.css";

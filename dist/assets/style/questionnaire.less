@@ -1,0 +1,333 @@
+/* Contains styles used when rendering a questionnaire */
+.content .questionnaire_form {
+  // vertical align form content around center
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 0.4;
+  justify-content: flex-start;
+  align-items: center;
+
+  input[type="text"],
+  input[type="number"],
+  input[type="button"] {
+    -webkit-appearance: none; //iOS Fix
+    border: 0px;
+    padding: 0px;
+    margin-top: 0px;
+    min-height: 2em;
+    font-size: 1.5em;
+    border-radius: 0.3em;
+    text-align: center;
+    .apply-background-color-and-border(@neutral-color);
+    .apply-subtle-shadow();
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    outline: none;
+  }
+
+  input[type="button"] {
+    .apply-background-color-and-border(@ok-button-color);
+
+    display: block;
+    color: @background-color;
+    font-family: @font, sans-serif;
+    font-weight: 700;
+    font-size: 2em;
+    height: 2.5em;
+    letter-spacing: 1px;
+  }
+
+  input[type="checkbox"] {
+    border: 0px;
+    border-radius: 0px;
+    padding: 0px;
+    margin-top: 0px;
+    font-size: 1em;
+    min-width: 1.5em;
+    vertical-align: middle;
+    position: relative;
+  }
+
+  input[type="range"] {
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+  }
+
+  label {
+    font-size: 1.3em;
+    color: @menu-item-text-color;
+  }
+
+  .button.cancel {
+    border-color: darken(@cancel-button-color, 10%);
+    background-color: @cancel-button-color;
+  }
+
+  a.link {
+    color: @menu-item-text-color;
+  }
+
+  a.link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}
+
+.questionnaire_content {
+  // Even spaced content
+  display: flex;
+  flex-direction: column;
+
+  // Centered content
+  margin: 0 auto;
+
+  h4 {
+    color: @questionnaire-header-text;
+    text-align: center;
+  }
+
+  h3 {
+    color: @questionnaire-header-text;
+  }
+
+  h2 {
+    color: @questionnaire-header-text;
+    padding: 0em;
+    margin: 0.5em auto;
+  }
+
+  div.center-div {
+    margin-bottom: 1em;
+  }
+
+  > .center-div h4 {
+    .notification;
+    .info;
+  }
+
+  > .center-div ul,
+  .center-div ol {
+    list-style-position: outside;
+
+    > li {
+      text-align: left !important;
+    }
+  }
+
+  > .center-div h4::before {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .radio-label {
+    text-align: left;
+    line-height: 1.5em;
+  }
+
+  fieldset {
+    box-sizing: content-box;
+    padding-bottom: 1em;
+    border: 0;
+
+    img {
+      width: 100%;
+      margin: auto;
+      display: block;
+    }
+
+    div {
+      margin: 0.5em;
+      font-size: 1.3em;
+      line-height: 2em;
+
+      input {
+        margin-left: 0.25em;
+        max-height: 3em;
+        min-height: 2em;
+        align-self: center;
+        background-color: @neutral-color;
+      }
+
+      input[type="checkbox"] {
+        vertical-align: middle;
+        min-width: 1.5em;
+      }
+
+      input[type="radio"] {
+        align-self: center;
+        min-width: 20px;
+        margin-right: 0.8em;
+        margin-top: 0em;
+        margin-bottom: 0.5em;
+        transform: scale(1.25);
+      }
+
+      textarea {
+        width: 80%;
+        margin: 1em auto;
+        padding: 0.25em 0.5em;
+        resize: none;
+        background-color: @neutral-color;
+        border: 0;
+        border-radius: 0.3em;
+        font-size: 1em;
+        font-family: "Lato";
+        outline: none;
+      }
+
+      ul {
+        padding-left: 0px;
+        list-style-type: none;
+        margin-left: auto;
+        margin-right: auto;
+
+        li {
+          display: flex;
+          justify-content: flex-start;
+          margin-bottom: 3%;
+          margin-top: 3%;
+
+          div {
+            min-width: 80%;
+            margin-left: 1em;
+          }
+        }
+      }
+    }
+
+    small.error-message {
+      color: @error-color;
+    }
+  }
+}
+
+// Input validation
+input.warning {
+  border-color: @warning-color !important;
+}
+
+span.warning {
+  block: display;
+  margin: 0.3em auto;
+  padding: 0 0.5em;
+  width: fit-content;
+  border-radius: 0.5em;
+  text-align: center;
+  font-size: 0.8em;
+  color: @warning-color;
+  background-color: @neutral-color;
+}
+
+// IO Nodes
+
+h2.text-element {
+  margin-left: 0.7em;
+  margin-right: 0.7em;
+}
+
+// Help menu
+
+button#help-button {
+  position: fixed;
+  top: 25%;
+  right: 0;
+  border: 0;
+
+  background-color: transparent;
+  color: @secondary-color;
+  font-size: 1.7em;
+  padding: 0 2px 0 0;
+}
+
+#help-menu {
+  box-sizing: border-box;
+  background-color: @background-color;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  #help-content{
+    flex-grow: 20;
+    flex-basis: 0;
+    display: block;
+    overflow: none;
+  }
+
+  h1#help-heading {
+    text-align: center;
+  }
+
+  img#help-image {
+    object-fit: contain;
+    max-width: 100%;
+    margin: auto;
+  }
+
+  div#help-text {
+    text-align: center;
+    margin-bottom: 1em;
+
+    ul {
+      list-style-position: inside;
+    }
+  }
+
+  p {
+    white-space: pre-wrap;
+  }
+}
+
+// Comment prompt
+#comment-prompt {
+  box-sizing: border-box;
+  background-color: @background-color;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  #comment-heading {
+    margin-top: 1em;
+    color: @header-color;
+  }
+
+  #comment-content{
+    flex-grow: 20;
+    flex-basis: 0;
+    display: block;
+    overflow: none;
+  }
+
+  #comment-field {
+    margin-top: 2em;
+    text-align: center;
+    height: 100%;
+  }
+
+  h1 {
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.5em;
+    color: @questionnaire-header-text;
+    margin: 0.5em;
+  }
+
+  textarea {
+    min-height: 50%;
+    min-width: 70%;
+    max-width: 90%;
+    margin-top: 1em;
+    padding: 0.25em 0.5em;
+    resize: none;
+    background-color: @neutral-color;
+    border: 0;
+    border-radius: 0.3em;
+    font-size: 1.3em;
+    font-family: "Lato";
+    outline: none;
+    .apply-subtle-shadow();
+  }
+}

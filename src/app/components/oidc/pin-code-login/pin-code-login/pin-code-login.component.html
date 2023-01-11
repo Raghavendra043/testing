@@ -1,0 +1,64 @@
+<div class="container">
+  <header-menu [showLogo]="true"></header-menu>
+
+  <div class="content space_between">
+    <div class="notification error" *ngIf="model.error">
+      <i class="notification_icon fas fa-exclamation-triangle"></i>
+      <span>{{ model.error | translate }}</span>
+    </div>
+
+    <div class="fill">
+      <form
+        #pinCodeForm="ngForm"
+        class="login_form"
+        id="pin-code-form"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        (ngSubmit)="login()">
+        <div id="input-container">
+          <div class="login_input">
+            <i class="fal fa-lock-alt"></i>
+
+            <input
+              id="pincode"
+              required
+              class="pincode"
+              type="text"
+              inputmode="numeric"
+              step="1"
+              placeholder="{{ 'LOGIN_MFA_PINCODE' | translate }}"
+              size="13"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              name="pinCode"
+              [(ngModel)]="model.pinCode" />
+          </div>
+
+          <div class="button_container">
+            <button
+              type="submit"
+              [disabled]="!loaded() || model.state === 'Loading'">
+              {{
+                model.state !== "Loading"
+                  ? ("LOGIN_LOGIN_BUTTON" | translate)
+                  : ""
+              }}
+              <i
+                *ngIf="model.state === 'Loading'"
+                class="fa fa-spinner fa-spin">
+              </i>
+            </button>
+          </div>
+        </div>
+
+        <div id="forgot-pincode-container">
+          <a id="forgot-pincode" class="link" (click)="forgotPinCode()">
+            {{ "LOGIN_FORGOT_PINCODE" | translate }}
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

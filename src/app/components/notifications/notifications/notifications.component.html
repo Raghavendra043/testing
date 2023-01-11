@@ -1,0 +1,11 @@
+<div
+  class="notification info"
+  *ngIf="info !== undefined && error === undefined">
+  <i class="notification_icon fas fa-info-circle"></i>
+  <span>{{ info | translate }}</span>
+</div>
+
+<div class="notification error" *ngIf="error !== undefined">
+  <i class="notification_icon fas fa-exclamation-triangle"></i>
+  <span>{{ error | translate }}</span>
+</div>

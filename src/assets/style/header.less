@@ -1,0 +1,68 @@
+// header.less
+#logo {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+
+  img {
+    margin-top: 1em;
+    max-width: 50%;
+  }
+
+  .clickable {
+    cursor: pointer;
+  }
+}
+
+#header {
+  background-color: @background-color;
+  padding-top: 1em;
+  text-align: center;
+  color: @header-color;
+  display: grid;
+  grid-template-columns: minmax(50px, max-content) 1fr minmax(50px, max-content);
+
+  div {
+    grid-row: 1;
+
+    button {
+      padding: 0 1.25rem;
+      background-color: transparent;
+      border: 0px solid transparent;
+    }
+
+    i {
+      color: @header-color;
+    }
+
+    i:active {
+      color: @disabled-color;
+    }
+  }
+
+  div.header-center {
+    display: inline-block;
+    padding-top: 0.2em;
+    grid-column: 2;
+    overflow: auto;
+
+    h1 {
+      margin: 0;
+      font-weight: 400;
+      font-stretch: extra-expanded;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .header-left {
+    grid-column: 1;
+  }
+
+  .header-right {
+    grid-column: 3;
+  }
+
+}
+

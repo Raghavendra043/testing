@@ -1,0 +1,196 @@
+@header-and-footer-height: 4.5em;
+
+// Header
+
+#header {
+  max-height: @header-and-footer-height;
+  min-height: @header-and-footer-height;
+
+  div {
+    button {
+      font-size: 2.5em;
+    }
+  }
+
+  div.header-center {
+    h1 {
+      font-size: 2.5em;
+    }
+  }
+}
+.page-title{
+  font-size: 2.5em;
+}
+
+// Footer
+
+#footer {
+  max-height: @header-and-footer-height;
+  min-height: @header-and-footer-height;
+  margin-left: 0.25em;
+  margin-right: 0.25em;
+  margin-bottom: 0.25em;
+}
+
+// Login
+
+.splash_screen {
+  background-size: 60% auto;
+}
+
+div#input-container {
+  flex-direction: row;
+
+  .button_container {
+    width: 70%;
+    padding: 1em;
+  }
+
+  button[type="submit"],
+  button[type="button"] {
+    width: 100%;
+  }
+}
+
+.login_form {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.login_input {
+  margin: 1em 1em;
+}
+
+// Lists
+
+.list_item {
+  font-size: 2.5em;
+}
+
+// Questionnaire
+
+.content .questionnaire_form {
+  input[type="text"],
+  input[type="number"],
+  input[type="button"] {
+    display: table-cell;
+  }
+
+  // hacks for the pain scale, blood sugar, CRP forms in landscape mode: start
+  label[for="painScale"],
+  label[for="lt5"],
+  label[for="count"] {
+    display: block;
+    margin: 0.25em auto;
+    text-align: center;
+  }
+
+  input[name="count"],
+  input[name="lt5"] {
+    display: block;
+    margin: 0 auto;
+  }
+  // hacks for the blood sugar and CRP forms in landscape mode: stop
+}
+
+.questionnaire_content {
+  padding: 1em;
+
+  fieldset {
+    display: table;
+    border-spacing: 0.5em 1em;
+    margin: 0 auto;
+    width: fit-content;
+
+    div {
+      display: table-row;
+
+      label {
+        display: table-cell;
+        font-size: 1.3em;
+        text-align: right;
+        vertical-align: middle;
+      }
+
+      input {
+        display: table-cell;
+        font-size: 1em;
+      }
+
+      textarea {
+        font-size: 1em;
+      }
+    }
+  }
+}
+
+.footer {
+  button {
+    font-size: 2em;
+  }
+}
+
+// Messages
+
+.message {
+  font-size: 2em;
+}
+
+.from_clinician {
+  background-size: 4em;
+
+  p {
+    margin-right: 4em;
+  }
+}
+
+div#char-count span {
+  font-size: 1.3em;
+}
+
+#write_message {
+  textarea {
+    font-size: 2em;
+  }
+
+  .icon {
+    font-size: 2em;
+    line-height: 2.2em;
+  }
+
+  #submit {
+    font-size: 1.3em;
+  }
+}
+
+// Help menu
+#help-menu {
+  div#help-text {
+    font-size: 1.25em;
+  }
+
+  img#help-image {
+    max-height: 60%;
+  }
+}
+
+// Measurements
+
+#graphs_and_table {
+  .my_results_table table {
+    thead {
+      font-size: 1.5em;
+    }
+    tbody {
+      font-size: 1.5em;
+    }
+  }
+}
+
+// Questionnaire replies
+
+#graphs_and_table {
+  .submission_date {
+    font-size: 1.6em;
+  }
+}

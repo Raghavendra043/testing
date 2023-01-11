@@ -1,0 +1,86 @@
+<form [formGroup]="nodeForm" (ngSubmit)="onSubmit()">
+  <div class="center-div">
+    <h2 class="line-wrap text-element">{{ node.text }}</h2>
+  </div>
+
+  <fieldset class="questionnaire-fields">
+    <div>
+      <label for="count">{{ "BLOOD_SUGAR_MG_DL" | translate }}</label>
+
+      <input
+        id="count"
+        name="count"
+        type="number"
+        min="0"
+        max="999"
+        step="0.1"
+        autocomplete="off"
+        formControlName="bloodSugarMeasurements"
+        [ngClass]="{ warning: isOffendingValue('bloodSugarMeasurements') }"
+        focusOnLoad />
+      <span
+        id="blood-sugar-warning"
+        *ngIf="isOffendingValue('bloodSugarMeasurements')"
+        class="warning"
+        >{{ "VALUE_INCORRECT_WARNING" | translate }}</span
+      >
+    </div>
+
+    <div>
+      <ul class="radio-list">
+        <li class="narrow-row list-unstyled">
+          <input
+            id="beforeMeal"
+            name="mealIndicator"
+            type="radio"
+            formControlName="mealIndicator"
+            value="bloodSugarManualBeforeMeal" />
+
+          <label for="beforeMeal" class="radio-label">{{
+            "BEFORE_MEAL" | translate
+          }}</label>
+        </li>
+
+        <li class="narrow-row list-unstyled">
+          <input
+            id="afterMeal"
+            name="mealIndicator"
+            type="radio"
+            formControlName="mealIndicator"
+            value="bloodSugarManualAfterMeal" />
+
+          <label for="afterMeal" class="radio-label">{{
+            "AFTER_MEAL" | translate
+          }}</label>
+        </li>
+
+        <li class="narrow-row list-unstyled">
+          <input
+            id="fasting"
+            name="mealIndicator"
+            type="radio"
+            formControlName="mealIndicator"
+            value="bloodSugarManualFasting" />
+
+          <label for="fasting" class="radio-label">{{
+            "FASTING" | translate
+          }}</label>
+        </li>
+
+        <li class="narrow-row list-unstyled">
+          <input
+            id="none"
+            name="mealIndicator"
+            formControlName="mealIndicator"
+            type="radio"
+            value="none"
+            checked />
+
+          <label for="none" class="radio-label">{{
+            "NO_MEAL_INDICATOR" | translate
+          }}</label>
+        </li>
+      </ul>
+    </div>
+  </fieldset>
+</form>

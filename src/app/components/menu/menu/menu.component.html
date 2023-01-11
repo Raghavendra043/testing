@@ -1,0 +1,28 @@
+<div class="container">
+  <header-menu
+    [title]="'MENU'"
+    [showBackBtn]="isClinician"
+    [isClinician]="isClinician"
+    [onBackFun]="goBack"
+    [showChangePasswordBtn]="model.canChangePassword"
+    [showLogoutBtn]="isClinician ? false : true"></header-menu>
+
+  <nav class="content">
+    <h1 class="page-title"
+        *ngIf="isClinician">
+      {{ "WELCOME" | translate }}, {{ user.firstName }} {{ user.lastName }}
+    </h1>
+
+    <a
+      *ngFor="let menuItem of model.menuItems"
+      routerLink="{{ menuItem.url }}"
+      [ngClass]="{
+        important_list_item: menuItem.important,
+        normal_list_item: !menuItem.important
+      }"
+      class="list_item">
+      <span class="before-icon">{{ menuItem.name }}</span>
+      <i aria-hidden="true" class="icon {{ menuItem.icon }}"></i>
+    </a>
+  </nav>
+</div>

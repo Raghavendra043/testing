@@ -1,0 +1,109 @@
+<div class="container white">
+  <header-menu
+    [showBackBtn]="true"
+    [showHomeBtn]="hasOtherResults ? true : false"
+    [title]="'QUESTIONNAIRE_RESULT_TITLE'"></header-menu>
+
+  <div class="content">
+    <loading-state
+      [stateModel]="state"
+      [loadingMessage]="'QUESTIONNAIRE_RESULT_LOADING'"
+      [failedMessage]="'QUESTIONNAIRE_RESULT_FAILED'">
+    </loading-state>
+
+    <div *ngIf="questionnaireResult">
+      <h1 class="graph_headline">
+        {{ questionnaireResult.name | translate }}
+      </h1>
+
+      <div id="graphs_and_table">
+        <div class="submission_date">
+          <span>
+            {{ "SUBMISSION_DATE" | translate }}:
+            {{ questionnaireResult.resultDate | amDateFormat: "ll" }}
+          </span>
+        </div>
+
+        <div class="my_results_table">
+          <table id="table" style="table-layout: unset">
+            <thead>
+              <tr>
+                <th>{{ "QUESTION" | translate }}</th>
+                <th>{{ "REPLY" | translate }}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr
+                id="questionnaire-result-item"
+                *ngFor="let question of questionnaireResult.questions"
+                (click)="showPopUp(question)">
+                <td>
+                  {{ question.patientText }}
+                </td>
+                <td>
+                  <span class="severity-and-comment">
+                    <i
+                      aria-hidden="true"
+                      class="fas fa-circle"
+                      [ngClass]="question.severity | severity: showSeverity">
+                    </i>
+                    <span
+                      class="comment-icon"
+                      [ngClass]="{
+                        'hide-comment-icon': !hasComment(question)
+                      }">
+                      <i aria-hidden="true" class="far fa-sticky-note"></i
+                    ></span>
+                  </span>
+                  <span prettyReply [reply]="question?.reply"></span>
+                </td>
+              </tr>
+            </tbody>
+
+            <tfoot>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="light-box-dimmer" (click)="hidePopUp()" *ngIf="popUpQuestion">
+      <div id="light-box" class="light-box">
+        <h3>{{ "COMMENT" | translate }}</h3>
+
+        <table class="measurement-info-table">
+          <tr>
+            <td class="row-header">{{ "TIMESTAMP" | translate }}:</td>
+            <td>
+              {{ popUpQuestion.timestamp }}
+            </td>
+          </tr>
+
+          <tr>
+            <td class="row-header">{{ "VALUE" | translate }}:</td>
+            <td>
+              <span prettyReply [reply]="popUpQuestion.reply"></span>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="row-header">{{ "COMMENT" | translate }}:</td>
+            <td>{{ popUpQuestion.comment }}</td>
+          </tr>
+        </table>
+
+        <div id="action-buttons" class="flex-column">
+          <button class="footer-button center-button" (click)="hidePopUp()">
+            {{ "CLOSE" | translate }}
+            <i aria-hidden="true" class="icon fas fa-times-circle"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

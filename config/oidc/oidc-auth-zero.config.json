@@ -1,0 +1,11 @@
+{
+  "discoveryComment": "https://oth-dev.eu.auth0.com/.well-known/openid-configuration",
+  "authorizationEndpoint": "https://oth-dev.eu.auth0.com",
+  "customLogoutUrlTemplate": "https://oth-dev.eu.auth0.com/v2/logout?client_id={clientId}&returnTo={postLogoutRedirectUri}",
+  "clientId": "jIC9FV1o7BaGjtmh7G3fXL5lVjN25J6b",
+  "redirectUri": "http://localhost:8000/client-citizen/",
+  "postLogoutRedirectUri": "http://localhost:8000/client-citizen/",
+  "invalidateSsoSession": false,
+  "scopes": "openid profile email",
+  "enabled": true
+}

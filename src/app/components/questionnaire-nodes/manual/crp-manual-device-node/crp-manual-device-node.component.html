@@ -1,0 +1,36 @@
+<form [formGroup]="nodeForm" (ngSubmit)="onSubmit()">
+  <div class="center-div">
+    <h2 class="line-wrap text-element">{{ node.text }}</h2>
+  </div>
+
+  <fieldset class="questionnaire-fields">
+    <div>
+      <label for="lt5">{{ "LT5" | translate }}</label>
+
+      <input
+        id="lt5"
+        name="lt5"
+        type="checkbox"
+        formControlName="crpLt5Measurement" />
+    </div>
+
+    <div>
+      <label for="count">{{ "OR_CRP" | translate }}</label>
+      <input
+        id="count"
+        name="count"
+        type="number"
+        step="0.1"
+        autocomplete="off"
+        focusOnLoad
+        [ngClass]="{ warning: isOffendingValue('CRP') }"
+        formControlName="crpCountMeasurement" />
+      <span
+        id="crp-warning"
+        *ngIf="isOffendingValue('CRP')"
+        class="warning"
+        >{{ "VALUE_INCORRECT_WARNING" | translate }}</span
+      >
+    </div>
+  </fieldset>
+</form>

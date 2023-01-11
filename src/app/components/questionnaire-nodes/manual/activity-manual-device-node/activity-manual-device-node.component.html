@@ -1,0 +1,26 @@
+<form [formGroup]="nodeForm" (ngSubmit)="onSubmit()">
+  <div class="center-div">
+    <h2 class="line-wrap text-element">{{ node.text! | translate }}</h2>
+  </div>
+
+  <fieldset class="questionnaire-fields">
+    <div class="block">
+      <label for="daily-steps">{{ "DAILY_STEPS" | translate }}</label>
+
+      <input
+        id="daily-steps"
+        name="daily-steps"
+        type="number"
+        step="1"
+        focusOnLoad
+        [ngClass]="{ warning: isOffendingValue('dailySteps') }"
+        formControlName="dailySteps" />
+      <span
+        id="daily-steps-warning"
+        *ngIf="isOffendingValue('dailySteps')"
+        class="warning"
+        >{{ "VALUE_INCORRECT_WARNING" | translate }}</span
+      >
+    </div>
+  </fieldset>
+</form>

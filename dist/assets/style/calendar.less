@@ -1,0 +1,68 @@
+// calendar.less
+#calendar_container {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.calendar_list_item {
+  display: flex;
+  flex-direction: row;
+
+  margin-bottom: 1em;
+  padding: 0.25em;
+
+  align-items: center;
+
+  border: 2px solid darken(@normal-list-item-color, 10%);
+  border-radius: 1em;
+
+  background-color: @normal-list-item-color;
+  .apply-subtle-shadow();
+
+  p {
+    margin: 0;
+    font-weight: 300;
+  }
+
+  h1 {
+    margin-right: 0.5em;
+  }
+}
+
+.calendar_date_container {
+  border-bottom: 2px solid @neutral-color;
+}
+
+.calendar_event_date {
+  text-align: right;
+  color: @secondary-color;
+}
+
+.calendar_event_description {
+  margin-left: 1em;
+  font-weight: normal;
+}
+
+.calendar_list_item_active {
+  background-color: @normal-list-item-color;
+
+  h4 {
+    font-weight: 400;
+    color: @secondary-color;
+  }
+}
+
+.action-button {
+  padding: 0.5em 1em;
+  color: white;
+  background-color: @important-list-item-color;
+  border-radius: 0.5em;
+}
+
+.date-area {
+  width: 33%;
+}
+
+.description-area {
+  width: 66%;
+}

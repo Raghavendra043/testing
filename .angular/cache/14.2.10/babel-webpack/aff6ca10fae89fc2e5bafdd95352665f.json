@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var LogLevel = /*#__PURE__*/(() => {\n  (function (LogLevel) {\n    LogLevel[\"DEBUG\"] = \"debug\";\n    LogLevel[\"INFO\"] = \"debug\";\n    LogLevel[\"WARN\"] = \"debug\";\n    LogLevel[\"ERROR\"] = \"error\";\n  })(LogLevel || (LogLevel = {}));\n  return LogLevel;\n})();","map":null,"metadata":{},"sourceType":"module"}

@@ -1,0 +1,23 @@
+<div
+  id="notification-loading"
+  class="notification info"
+  *ngIf="stateModel === 'Loading'">
+  <i class="notification_icon fas fa-info-circle"></i>
+  {{ loadingMessage | translate }}
+</div>
+
+<div
+  id="notification-no-data"
+  class="notification info"
+  *ngIf="stateModel === 'Loaded' && hasNoData">
+  <i class="notification_icon fas fa-info-circle"></i>
+  {{ noDataMessage | translate }}
+</div>
+
+<div
+  id="notification-error"
+  class="notification error"
+  *ngIf="stateModel === 'Failed'">
+  <i class="notification_icon fas fa-exclamation-triangle"></i>
+  {{ failedMessage | translate }}
+</div>

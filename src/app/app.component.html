@@ -1,0 +1,7 @@
+<div class="light-box-dimmer" *ngIf="countdown">
+  <div id="light-box" class="light-box pre-wrap">
+    <p>{{ "LOGOUT_TIMEOUT" | translate: { time: countdown } }}</p>
+  </div>
+</div>
+<loading-widget [showSpinner]="showSpinner"></loading-widget>
+<router-outlet></router-outlet>

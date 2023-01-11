@@ -1,0 +1,11 @@
+{
+  "appType": "clinicianAndPatientApp",
+  "version": "2.76.1",
+  "fakeNativeEnabled": false,
+  "idleTimeoutInSeconds": 600,
+  "idleWarningCountdownInSeconds": 60,
+  "showSeverity": true,
+  "showReplies": true,
+  "baseUrl": "https://ode-demo.oth.io/",
+  "helpAndInfoUrl": "https://oth.io"
+}

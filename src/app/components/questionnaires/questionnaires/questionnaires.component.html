@@ -1,0 +1,46 @@
+<div class="container">
+  <header-menu
+    [showBackBtn]="true"
+    [isClinician]="isClinician"
+    [title]="'PERFORM_MEASUREMENTS'"></header-menu>
+
+  <loading-state
+    [stateModel]="model.state"
+    [hasNoData]="model.questionnaires.length === 0"
+    [noDataMessage]="'QUESTIONNAIRES_NO_QUESTIONNAIRES'"
+    [loadingMessage]="'QUESTIONNAIRES_LOADING'"
+    [failedMessage]="'QUESTIONNAIRES_FAILED'"></loading-state>
+
+  <nav class="content">
+    <a
+      id="{{ questionnaireRef.name }} {{ questionnaireRef.version }}"
+      *ngFor="let questionnaireRef of model.questionnaires; index as i"
+      (click)="showQuestionnaire(i)"
+      [ngClass]="{
+        important_list_item: questionnaireRef.scheduleWindow?.open,
+        normal_list_item: !questionnaireRef.scheduleWindow?.open
+      }"
+      class="flex_list list_item">
+      <div class="questionnaire_list_item_container">
+        <span class="questionnaire_list_item">
+          {{ questionnaireRef.name }}
+        </span>
+
+        <span
+          *ngIf="questionnaireRef.scheduleWindow"
+          class="schedule_window_indicator">
+          {{ questionnaireRef.scheduleWindow.end }}
+        </span>
+      </div>
+    </a>
+  </nav>
+
+  <div id="footer" class="flex-column" *ngIf="isClinician">
+    <button
+      id="other-questionnaires"
+      class="footer-button right-button"
+      (click)="goOtherQuestionnaires()">
+      {{ "OTHER_QUESTIONNAIRES" | translate }}
+    </button>
+  </div>
+</div>

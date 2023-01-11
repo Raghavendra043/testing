@@ -1,0 +1,223 @@
+.padding_when_notification {
+  // This is a slightly dirty trick to avoid the login form from jumping down the
+  // screen when an error is displayed.
+  padding-top: 0em !important;
+}
+
+.login_form {
+  padding-top: 5.3em;
+}
+
+div#input-container {
+  display: flex;
+  align-items: stretch;
+  // flex-direction set in portrait.less and landscape.less
+}
+
+.login_input {
+  padding: 1em;
+
+  border-radius: 0.3em;
+  border: 2px solid darken(@neutral-color, 10%);
+
+  background-color: @neutral-color;
+  text-align: center;
+  width: 70%;
+
+  i.fal,
+  i.far {
+    display: inline-block;
+    float: left;
+    vertical-align: middle;
+    font-size: 2em;
+    color: @primary-color;
+  }
+  .apply-subtle-shadow();
+}
+
+.button_container {
+  text-align: center;
+  padding: 1em 0em 1em 0em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// Login warnings
+i.warning {
+  color: @warning-color !important;
+}
+
+.login_form {
+  input:focus {
+    outline: none;
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="number"],
+  input[type="submit"],
+  input[type="button"],
+  button[type="button"] {
+    display: inline-block;
+    padding: 0;
+
+    border: 0px;
+    border-radius: 0.3em;
+    width: 75%;
+
+    vertical-align: middle;
+    text-align: left;
+
+    background-color: @neutral-color;
+    font-size: 1.5em;
+
+    i.fa {
+      text-align: center;
+      vertical-align: middle;
+    }
+    -webkit-appearance: none; //iOS Fix
+  }
+
+  input[type="text"],
+  input[type="password"],
+  input[type="number"] {
+    margin: 0 auto;
+  }
+
+  input[type="submit"],
+  button[type="button"],
+  input[type="button"] {
+    .apply-background-color-and-border(@ok-button-color);
+
+    display: block;
+    color: @background-color;
+    font-family: @font, sans-serif;
+    font-size: 1.5em;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+
+  input[type="submit"]:disabled {
+    .apply-background-color-and-border(@disabled-button-color);
+  }
+
+  button[type="button"]:disabled {
+    .apply-background-color-and-border(@disabled-button-color);
+  }
+
+  input[type="checkbox"] {
+    border: 0px;
+    border-radius: 0px;
+    padding: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 1em;
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: bottom;
+    position: relative;
+  }
+
+  input::placeholder {
+    color: darken(@neutral-color, 30%);
+  }
+
+  label {
+    font-size: 1.3em;
+    color: @menu-item-text-color;
+  }
+
+  .button.cancel {
+    border-color: darken(@cancel-button-color, 10%);
+    background-color: @cancel-button-color;
+  }
+
+  #forgot-pincode {
+    font-size: 1.3em;
+  }
+
+  #save-pin-code {
+    border-color: darken(@ok-button-color, 10%);
+    background-color: @ok-button-color;
+  }
+
+  #save-pin-code:disabled {
+    .apply-background-color-and-border(@disabled-button-color);
+  }
+
+  a.link {
+    color: @menu-item-text-color;
+  }
+
+  a.link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .login-button-container {
+    min-width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1em;
+  }
+
+  button[type="submit"],
+  button[type="button"] {
+    border: 0px;
+    border-radius: 0.3em;
+    width: 75%;
+    background-color: @neutral-color;
+    font-size: 1.5em;
+    -webkit-appearance: none; //iOS Fix
+    .apply-background-color-and-border(@ok-button-color);
+    color: @background-color;
+    font-family: @font, sans-serif;
+    font-size: 2em;
+    min-height: 2em;
+    letter-spacing: 1px;
+    .apply-subtle-shadow();
+  }
+
+  button[type="submit"]:disabled {
+    .apply-background-color-and-border(@disabled-button-color);
+  }
+  input[type="submit"]:active,
+  button[type="submit"]:active {
+    filter: brightness(70%);
+    transition: filter 100ms;
+  }
+}
+
+.confirm-btn {
+  border-color: darken(@ok-button-color, 10%);
+  background-color: @ok-button-color;
+  color: @background-color;
+}
+.confirm-btn:active {
+  filter: brightness(70%);
+  transition: filter 100ms;
+}
+
+
+#info-box-container,
+#forgot-pincode-container {
+  margin-top: 2em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+#disclaimer-text {
+  color: @menu-item-text-color;
+  margin-top: 0.5em;
+  font-size: 1.1em;
+}
+
+// oidc
+
+input#oidc-retry,
+input#oidc-sign-in {
+  margin: 2em auto;
+  font-size: 1.1em;
+}

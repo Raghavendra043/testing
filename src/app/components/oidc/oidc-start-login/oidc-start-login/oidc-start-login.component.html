@@ -1,0 +1,28 @@
+<div class="container">
+  <header-menu [showLogo]="true"></header-menu>
+
+  <div class="content space_between">
+    <div id="info-box-container">
+      <div id="disclaimer-text">
+        {{ "OIDC_INFO_TEXT" | translate }}
+      </div>
+    </div>
+
+    <div class="notification error" *ngIf="errorMessage">
+      <i class="notification_icon fas fa-exclamation-triangle"></i>
+      <span>{{ errorMessage | translate }} {{ errorDescription }}</span>
+    </div>
+
+    <div class="fill">
+      <div id="input-container">
+        <input
+          id="oidc-sign-in"
+          type="submit"
+          value="{{ 'OIDC_SIGN_IN_TEXT' | translate }}"
+          *ngIf="oidcSignIn"
+          (click)="sendOIDCAuthRequest()"
+          class="list_item confirm-btn" />
+      </div>
+    </div>
+  </div>
+</div>

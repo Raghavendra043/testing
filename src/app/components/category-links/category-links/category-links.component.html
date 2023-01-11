@@ -1,0 +1,41 @@
+<div class="container">
+  <header-menu
+    [showBackBtn]="true"
+    [title]="model.name"
+    [showHomeBtn]="model.hasOtherCategories"></header-menu>
+
+  <div class="notification info" *ngIf="!(model.resources.length > 0)">
+    <i class="notification_icon fas fa-info-circle"></i>
+    <span>{{ "CATEGORY_LINKS_NO_CATEGORY_LINKS" | translate }}</span>
+  </div>
+
+  <nav class="content">
+    <a
+      *ngFor="let resource of model.resources; index as i"
+      [ngClass]="{ 'marked-button': resource.marked }"
+      (click)="showPopup(i)"
+      class="list_item normal_list_item">
+      <span class="before-icon">{{ resource.title }}</span>
+      <i aria-hidden="true" class="icon {{ resource.icon }}"></i>
+    </a>
+  </nav>
+
+  <div class="light-box-dimmer" *ngIf="model.showPopup">
+    <div id="light-box" class="light-box">
+      <h3>{{ "CATEGORY_LINKS_PLEASE_NOTE_TITLE" | translate }}</h3>
+      <p>{{ "CATEGORY_LINKS_PLEASE_NOTE_TEXT" | translate }}</p>
+
+      <div id="action-buttons" class="flex-column">
+        <button class="footer-button left-button" (click)="hidePopup()">
+          {{ "CATEGORY_LINKS_BACK_BUTTON" | translate }}
+          <i aria-hidden="true" class="icon fas fa-times-circle"></i>
+        </button>
+
+        <button class="footer-button right-button" (click)="showLink()">
+          {{ "CATEGORY_LINKS_CONTINUE_BUTTON" | translate }}
+          <i aria-hidden="true" class="icon fas fa-check-circle"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

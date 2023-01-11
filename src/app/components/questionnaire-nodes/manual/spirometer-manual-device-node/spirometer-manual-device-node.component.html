@@ -1,0 +1,73 @@
+<form [formGroup]="nodeForm" (ngSubmit)="onSubmit()">
+  <div class="center-div">
+    <h2 class="line-wrap text-element">{{ node.text | translate }}</h2>
+  </div>
+
+  <fieldset class="questionnaire-fields">
+    <div class="block">
+      <label for="spirometer-fev1">{{ "SPIROMETER_FEV1" | translate }}</label>
+
+      <input
+        id="spirometer-fev1"
+        name="spirometer-fev1"
+        type="number"
+        step="0.1"
+        focusOnLoad
+        [ngClass]="{ warning: isOffendingValue('fev1') }"
+        formControlName="fev1" />
+
+      <span
+        id="fev1-warning"
+        *ngIf="isOffendingValue('fev1')"
+        class="warning">{{ "VALUE_INCORRECT_WARNING" | translate }}</span>
+    </div>
+
+    <div class="block">
+      <label for="spirometer-fev6">{{ "SPIROMETER_FEV6" | translate }}</label>
+
+      <input
+        id="spirometer-fev6"
+        name="spirometer-fev6"
+        type="number"
+        step="0.1"
+        [ngClass]="{ warning: isOffendingValue('fev6') }"
+        formControlName="fev6" />
+      <span
+        id="fev6-warning"
+        *ngIf="isOffendingValue('fev6')"
+        class="warning">{{ "VALUE_INCORRECT_WARNING" | translate }}</span>
+    </div>
+
+    <div class="block">
+      <label for="spirometer-fev1Fev6Ratio">{{ "SPIROMETER_FEV1_FEV6_RATIO" | translate }}</label>
+
+      <input
+        id="spirometer-fev1Fev6Ratio"
+        name="spirometer-fev1Fev6Ratio"
+        type="number"
+        step="0.1"
+        [ngClass]="{ warning: isOffendingValue('fev1Fev6Ratio') }"
+        formControlName="fev1Fev6Ratio" />
+      <span
+        id="fev1-fev6-ratio-warning"
+        *ngIf="isOffendingValue('fev1Fev6Ratio')"
+        class="warning">{{ "VALUE_INCORRECT_WARNING" | translate }}</span>
+    </div>
+
+    <div class="block">
+      <label for="spirometer-fef2575">{{ "SPIROMETER_FEF25_75" | translate }}</label>
+
+      <input
+        id="spirometer-fef2575"
+        name="spirometer-fef2575"
+        type="number"
+        step="0.1"
+        [ngClass]="{ warning: isOffendingValue('fef2575') }"
+        formControlName="fef2575" />
+      <span
+        id="fef2575-warning"
+        *ngIf="isOffendingValue('fef2575')"
+        class="warning">{{ "VALUE_INCORRECT_WARNING" | translate }}</span>
+    </div>
+  </fieldset>
+</form>

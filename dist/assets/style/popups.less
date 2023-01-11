@@ -1,0 +1,103 @@
+.loading-widget {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.light-box-dimmer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+
+  .light-box {
+    transform: translateY(50%);
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    width: 90%;
+    border-radius: 0.5em;
+
+    h3 {
+      color: black;
+      padding: 1em;
+      text-align: center;
+      border: 0px solid transparent;
+      border-bottom-width: 1px;
+      border-bottom-color: black;
+    }
+
+    p {
+      padding: 1em;
+      margin-bottom: 2em;
+      text-align: center;
+      font-size: 1.3em;
+    }
+
+    div#action-buttons {
+      min-height: 4em;
+      padding-bottom: 0.1em;
+    }
+  }
+}
+
+.pre-wrap{
+  white-space: pre-wrap;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+
+  width: 100%;
+  height: 100%;
+}
+
+#loader-overlay {
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  background-image: url(../images/loader.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  animation: delayedFade 400ms;
+}
+
+@keyframes delayedFade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Measurement table popup */
+span.comment-icon {
+  margin-left: 0.25em;
+  padding-left: 1em;
+}
+
+.hide-comment-icon {
+  visibility: hidden;
+}
+
+table.measurement-info-table {
+  margin-bottom: 2em;
+  padding: 0 0.5em;
+  width: 100%;
+
+  td.row-header {
+    padding-right: 0.5em;
+    vertical-align: top;
+    font-weight: bold;
+    text-align: right;
+  }
+}

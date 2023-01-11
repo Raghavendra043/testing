@@ -1,0 +1,162 @@
+@header-and-footer-height: 5em;
+
+.landscape {
+  transform: rotate(90deg) translateY(-100vw);
+  transform-origin: 0% 0%;
+  width: 100vh !important;
+  height: 100vw !important;
+}
+
+// Header
+
+#header {
+  max-height: @header-and-footer-height;
+  min-height: 3em;
+
+  div {
+    button {
+      font-size: 2em;
+    }
+  }
+
+  div.header-center {
+    h1 {
+      font-size: 1.5em;
+    }
+  }
+}
+
+// Footer
+
+#footer {
+  max-height: @header-and-footer-height;
+  min-height: @header-and-footer-height;
+}
+
+// Login
+
+.splash_screen {
+  background-size: 80% auto;
+}
+
+div#input-container {
+  flex-direction: column;
+}
+
+.login_input {
+  margin: 1.5em auto;
+}
+
+// Lists
+
+.list_item {
+  font-size: 1.5em;
+}
+
+// Questionnaire
+
+.content .questionnaire_form {
+  input[type="text"],
+  input[type="number"],
+  input[type="button"] {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 8em;
+  }
+}
+
+.questionnaire_content {
+  padding: 0.5em;
+
+  .radio-label {
+    padding-top: 0.15em;
+  }
+
+  fieldset {
+    // vertical align form content around center
+    display: flex;
+    flex-direction: column;
+
+    div {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        flex-grow: 1;
+        margin-bottom: 0.5em;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+    }
+  }
+}
+
+// Messages
+
+.message {
+  font-size: 1.3em;
+}
+
+.from_clinician {
+  background-size: 3.5em;
+
+  p {
+    margin-right: 3.5em;
+  }
+}
+
+#write_message {
+  textarea {
+    font-size: 1.3em;
+  }
+
+  .icon {
+    font-size: 1.1em;
+    line-height: 2.2em;
+  }
+
+  #submit {
+    font-size: 1em;
+  }
+}
+
+// Help menu
+
+#help-menu {
+  div#help-text {
+    font-size: 1.25em;
+  }
+
+  img#help-image {
+    max-height: 80%;
+  }
+}
+
+// Measurements
+
+#graphs_and_table {
+  .my_results_table table {
+    thead {
+      font-size: medium;
+    }
+    tbody {
+      font-size: 0.75em;
+    }
+  }
+}
+
+// Questionnaire replies
+
+#graphs_and_table {
+  .submission_date {
+    font-size: 1.1em;
+  }
+}
+
+// Notifications
+
+.notification {
+  max-width: 90%;
+}

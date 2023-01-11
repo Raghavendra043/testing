@@ -1,0 +1,300 @@
+<div class="container">
+  <header-menu
+    [title]="'CREATE_PATIENT'"
+    [showChangePasswordBtn]="false"
+    [showBackBtn]="true"
+    [showLogoutBtn]="false"></header-menu>
+
+  <div
+    id="notification-permission-warning"
+    class="notification warning"
+    *ngIf="!hasPermissions">
+    <i class="notification_icon fas fa-exclamation-triangle"></i>
+    {{ "CLINICIAN_PERMISSION_WARNING" | translate }}
+  </div>
+
+  <div
+    id="notification-patient-created"
+    class="notification info"
+    *ngIf="model.state === 'Loaded'">
+    <i class="notification_icon fas fa-info-circle"></i>
+    {{ "CREATE_PATIENT_CREATED" | translate }}
+  </div>
+
+  <div
+    id="notification-patient-error"
+    class="notification error"
+    *ngIf="model.state === 'Failed'">
+    <div class="notification-list">
+      <span id="notification-error"
+        ><i class="notification_icon fas fa-exclamation-triangle"></i
+        >{{ "CREATE_PATIENT_FAILED" | translate }}</span
+      >
+      <li *ngFor="let error of model.errors">{{ error }}</li>
+    </div>
+  </div>
+
+  <nav class="content">
+    <form [formGroup]="createPatientForm" (ngSubmit)="createPatient()">
+      <!-- Basic data -->
+      <div class="card" id="basic-data">
+        <div class="header">
+          <h2>
+            <i aria-hidden="true" class="icon fas fa-user"></i
+            >{{ "CREATE_PATIENT_BASIC_DATA" | translate }}
+          </h2>
+        </div>
+
+        <div class="form-group">
+          <label class="required" for="unique-id"
+            >{{ "CREATE_PATIENT_UNIQUE_ID" | translate }}
+          </label>
+
+          <input
+            id="unique-id"
+            name="unique-id"
+            focusOnLoad
+            type="text"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            [ngClass]="{
+              warning: !uniqueId.valid && !uniqueId.pristine
+            }"
+            formControlName="uniqueId" />
+        </div>
+
+        <div class="form-group">
+          <label class="required" for="first-name">{{
+            "CREATE_PATIENT_FIRST_NAME" | translate
+          }}</label>
+          <input
+            id="first-name"
+            name="first-name"
+            type="text"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            [ngClass]="{
+              warning: !firstName.valid && !firstName.pristine
+            }"
+            formControlName="firstName" />
+        </div>
+
+        <div class="form-group">
+          <label class="required" for="last-name">{{
+            "CREATE_PATIENT_LAST_NAME" | translate
+          }}</label>
+          <input
+            id="last-name"
+            name="last-name"
+            type="text"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            [ngClass]="{
+              warning: !lastName.valid && !lastName.pristine
+            }"
+            formControlName="lastName" />
+        </div>
+
+        <div class="form-group">
+          <label class="required" for="sex" id="sex-label">{{
+            "CREATE_PATIENT_SEX" | translate
+          }}</label>
+
+          <ng-multiselect-dropdown
+            id="sex"
+            formControlName="sex"
+            [placeholder]="'CREATE_PATIENT_SEX' | translate"
+            [settings]="selectSettings"
+            [(ngModel)]="sexModel"
+            [data]="sexList"
+            [ngClass]="{
+              warning: !sex.valid && !sex.pristine
+            }">
+          </ng-multiselect-dropdown>
+        </div>
+
+        <div class="form-group">
+          <label class="required" for="data-of-birth">{{
+            "CREATE_PATIENT_DATE_OF_BIRTH" | translate
+          }}</label>
+          <input
+            type="date"
+            id="date-of-birth"
+            [ngClass]="{
+              placeholder: !dateOfBirth.valid,
+              warning: !dateOfBirth.valid && !dateOfBirth.pristine
+            }"
+            formControlName="dateOfBirth" />
+        </div>
+
+        <div class="form-group">
+          <label class="required" for="username">{{
+            "LOGIN_FORM_USERNAME" | translate
+          }}</label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            [ngClass]="{
+              warning: !username.valid && !username.pristine
+            }"
+            formControlName="username" />
+        </div>
+
+        <div class="form-group">
+          <label class="required" for="temporary-password">{{
+            "CREATE_PATIENT_TEMP_PASSWORD" | translate
+          }}</label>
+          <input
+            id="temporary-password"
+            name="temporary-password"
+            type="text"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            [ngClass]="{
+              warning: !temporaryPassword.valid && !temporaryPassword.pristine
+            }"
+            formControlName="temporaryPassword" />
+        </div>
+        <div class="form-group">
+          <label
+            class="required"
+            for="patient-groups"
+            id="patient-groups-label"
+            >{{ "CREATE_PATIENT_PATIENT_GROUPS" | translate }}</label
+          >
+
+          <ng-multiselect-dropdown
+            id="patient-groups"
+            formControlName="patientGroups"
+            [placeholder]="'CREATE_PATIENT_SELECT_PATIENT_GROUP' | translate"
+            [settings]="multiselectSettings"
+            [data]="patientGroupList"
+            (onSelect)="closeMultiselect()"
+            (onSelectAll)="closeMultiselect()"
+            (onDeSelect)="closeMultiselect()"
+            [ngClass]="{
+              warning: !patientGroups.valid && !patientGroups.pristine
+            }">
+          </ng-multiselect-dropdown>
+          <div id="patient-group-threshold-info" class="notification info">
+            <i class="notification_icon fas fa-info-circle"></i>
+            {{ "CREATE_PATIENT_THRESHOLD_INFO" | translate }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="card" id="contact-information">
+        <div class="header">
+          <h2>
+            <i aria-hidden="true" class="icon fas fa-home"></i
+            >{{ "CREATE_PATIENT_CONTACT_INFO" | translate }}
+          </h2>
+        </div>
+
+        <div class="form-group">
+          <label class="required" for="address">{{
+            "CREATE_PATIENT_ADDRESS" | translate
+          }}</label>
+          <input
+            id="address"
+            name="address"
+            type="text"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            [ngClass]="{
+              warning: !address.valid && !address.pristine
+            }"
+            formControlName="address" />
+        </div>
+
+        <div class="form-group">
+          <label class="required" for="postal-code">{{
+            "CREATE_PATIENT_POSTAL_CODE" | translate
+          }}</label>
+          <input
+            id="postal-code"
+            name="postal-code"
+            type="text"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            [ngClass]="{
+              warning: !postalCode.valid && !postalCode.pristine
+            }"
+            formControlName="postalCode" />
+        </div>
+
+        <div class="form-group">
+          <label class="required" for="city">{{
+            "CREATE_PATIENT_CITY" | translate
+          }}</label>
+          <input
+            id="city"
+            name="city"
+            type="text"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            [ngClass]="{
+              warning: !city.valid && !city.pristine
+            }"
+            formControlName="city" />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">{{ "CREATE_PATIENT_PHONE" | translate }}</label>
+          <input
+            id="phone"
+            name="phone"
+            type="text"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            [ngClass]="{
+              warning: !phone.valid && !phone.pristine
+            }"
+            formControlName="phone" />
+        </div>
+        <div class="form-group">
+          <label for="email">{{ "CREATE_PATIENT_EMAIL" | translate }}</label>
+          <input
+            id="email"
+            name="email"
+            type="text"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            [ngClass]="{
+              warning: !email.valid && !email.pristine
+            }"
+            formControlName="email" />
+        </div>
+      </div>
+
+      <div class="button-container">
+        <button
+          id="create"
+          class="contained-create-btn"
+          type="submit"
+          [disabled]="!createPatientForm.valid || model.state === 'Loading'">
+          &nbsp;
+          {{ model.state !== "Loading" ? ("CREATE_PATIENT" | translate) : "" }}
+          &nbsp;
+          <i *ngIf="model.state !== 'Loading'" class="fa fa-user-plus"></i>
+          <i *ngIf="model.state === 'Loading'" class="fa fa-spinner fa-spin">
+          </i>
+        </button>
+      </div>
+    </form>
+  </nav>
+</div>

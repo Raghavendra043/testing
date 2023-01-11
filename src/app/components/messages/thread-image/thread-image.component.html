@@ -1,0 +1,27 @@
+<img
+  *ngIf="src"
+  src="{{ src }}"
+  alt=""
+  class="thread-image click-to-zoom"
+  (click)="zoom()" />
+<div class="thread-image thread-image-placeholder" *ngIf="!src">
+  <i class="fa fa-spinner fa-spin" *ngIf="!previewLoaded"></i>
+  <i class="fa fa-times" *ngIf="previewLoaded"></i>
+</div>
+
+<div *ngIf="open" class="modal" (click)="closeModal()">
+  <i *ngIf="!loaded" class="fa fa-spin fa-spinner fa-2x"></i>
+  <img *ngIf="loaded && open" src="{{ fullSrc }}" alt="" />
+  <button
+    class="delete"
+    *ngIf="showDelete && !deleteClicked"
+    (click)="openDeletionDialog($event)">
+    <i class="fa fa-trash"></i> {{ "DELETE" | translate }}
+  </button>
+  <button
+    class="confirm-delete"
+    *ngIf="deleteClicked"
+    (click)="confirmDelete($event)">
+    <i class="fa fa-trash"></i> {{ "CONFIRM_DELETE" | translate }}
+  </button>
+</div>

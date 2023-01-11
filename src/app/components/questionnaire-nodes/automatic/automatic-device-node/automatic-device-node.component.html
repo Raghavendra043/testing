@@ -1,0 +1,41 @@
+<form [formGroup]="nodeForm" (ngSubmit)="onSubmit()">
+  <div class="center-div">
+    <h2 class="line-wrap text-element">{{ node.text }}</h2>
+  </div>
+
+  <notifications
+    [info]="nodeModel?.info"
+    [error]="nodeModel?.error"></notifications>
+
+  <div
+    class="notification progress"
+    *ngIf="nodeModel?.error === undefined && nodeModel!.progress! > 0">
+    <i class="notification_icon fas fa-play-circle"></i>
+    <div id="progress-container">
+      <label id="progress-label">{{ nodeModel?.progress }}% {{ "ACTIVITY_TRACKER_SYNCED_PERCENTAGE" | translate }}</label>
+
+      <progress
+        id="progress-bar"
+        max="100"
+        value="{{ nodeModel?.progress }}"></progress>
+    </div>
+  </div>
+
+  <h1 class="line-wrap" *ngIf="errorTitle"></h1>
+  <div *ngIf="error" class="content questionnaire_content">
+    <h2 class="line-wrap">{{ parameters.error }}</h2>
+  </div>
+
+  <fieldset formArrayName="inputControls" class="questionnaire-fields">
+    <div class="block" *ngFor="let input of inputs; let i = index">
+      <label for="measurement">{{ input.translationId | translate }}</label>
+
+      <input
+        [id]="input.key"
+        [name]="input.key"
+        type="number"
+        [value]="nodeModel![input.key]"
+        [formControlName]="i" />
+    </div>
+  </fieldset>
+</form>

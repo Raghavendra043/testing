@@ -1,0 +1,128 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "cli": {
+    "packageManager": "yarn",
+    "analytics": "1d992805-1c16-4e30-9758-51dcdc9f0fcd"
+  },
+  "projects": {
+    "opentele-client-html-angular": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "less"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/",
+            "baseHref": "/client-citizen/",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "less"
+          },
+
+          "configurations": {
+            "productFlavor": {
+              "fileReplacements": [
+                {
+                  "replace": "src/app/product-flavor/translationOverrides.ts",
+                  "with": "src/product-flavors/oth/translationOverrides.ts"
+                },
+                {
+                  "replace": "src/app/product-flavor/colors.ts",
+                  "with": "src/product-flavors/oth/colors.ts"
+                }
+              ],
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "**/*",
+                  "input": "src/product-flavors/oth/images",
+                  "output": "assets/product-flavor/images"
+                }
+              ]
+            },
+
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "4mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "extractLicenses": false,
+              "vendorChunk": true,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production,productFlavor"
+        },
+
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "opentele-client-html-angular:build:production,productFlavor"
+            },
+            "development": {
+              "browserTarget": "opentele-client-html-angular:build:development,productFlavor"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "opentele-client-html-angular:build"
+          }
+        },
+
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "inlineStyleLanguage": "less",
+            "scripts": []
+          }
+        },
+
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "opentele-client-html-angular"
+}

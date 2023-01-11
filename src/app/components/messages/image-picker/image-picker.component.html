@@ -1,0 +1,16 @@
+<div class="image-preview" *ngIf="filePreviews.length > 2">
+  <div class="preview ellipsis">+{{ filePreviews.length - 2 }}</div>
+</div>
+<div class="image-preview" *ngFor="let filePreview of filePreviews | slice: -2">
+  <img class="preview" [src]="filePreview.preview" />
+  <a class="close-button" (click)="cancel(filePreview)"><i class="fa fa-times fa-lg"></i></a>
+</div>
+<label for="file-upload" class="file-upload-label">
+  <i class="far fa-image icon"></i>
+</label>
+<input
+  id="file-upload"
+  type="file"
+  accept="image/*"
+  style="display: none"
+  (change)="uploadFile($event)" />

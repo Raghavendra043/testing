@@ -1,0 +1,126 @@
+.graph_headline {
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.5em;
+}
+
+.graph_wrapper {
+  margin: 1em auto;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  position: relative;
+  height: 80vh;
+}
+
+#graphs_and_table {
+  align-items: center;
+
+  .submission_date {
+    margin-left: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  .my_results_table table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 1.2em;
+    table-layout: fixed;
+    margin-top: 2em;
+
+    thead {
+      color: @primary-color;
+      background-color: @neutral-color;
+
+      tr {
+        th {
+          padding-top: 0.25em;
+          padding-bottom: 0.25em;
+        }
+      }
+    }
+
+    tbody {
+      text-align: center;
+
+      .severity-and-comment {
+        float: left;
+        padding-right: 0.3em;
+      }
+
+      tr:nth-child(2n) {
+        background-color: fade(@neutral-color, 50%);
+      }
+
+      td:first-child {
+        padding-left: 0.5em;
+      }
+
+      td:last-child {
+        padding-right: 0.5em;
+      }
+
+      td {
+        vertical-align: top;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+      }
+    }
+
+    tfoot {
+      background-color: @neutral-color;
+
+      tr {
+        td {
+          height: 1em;
+        }
+      }
+    }
+  }
+}
+
+#data_range_selectors {
+  line-height: 3.5em;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  color: @questionnaire-header-text;
+  min-height: 2em;
+  align-items: stretch;
+  text-align: center;
+  line-height: 2em;
+
+  .data_range_selector {
+    background-color: @neutral-color;
+    flex-grow: 1;
+  }
+
+  .selected_data_range_selector {
+    color: @neutral-color;
+    background-color: @primary-color;
+  }
+}
+
+i.severity-red {
+  color: #ff0000;
+  width: 0;
+}
+
+i.severity-yellow {
+  color: #ffed00;
+  width: 0;
+}
+
+i.severity-green {
+  color: #54ea30;
+  width: 0;
+}
+
+i.severity-none {
+  opacity: 0;
+  width: 0;
+}
+
+.measurement-table-value {
+  display: inline-block;
+}

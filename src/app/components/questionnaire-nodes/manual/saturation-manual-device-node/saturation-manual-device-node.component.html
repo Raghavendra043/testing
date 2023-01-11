@@ -1,0 +1,46 @@
+<form [formGroup]="nodeForm" (ngSubmit)="onSubmit()">
+  <div class="center-div">
+    <h2 class="line-wrap text-element">{{ node.text | translate }}</h2>
+  </div>
+
+  <fieldset class="questionnaire-fields">
+    <div class="block">
+      <label for="saturation-saturation">{{
+        "SATURATION_SATURATION" | translate
+      }}</label>
+
+      <input
+        id="saturation-saturation"
+        name="saturation-saturation"
+        type="number"
+        step="1"
+        focusOnLoad
+        [ngClass]="{ warning: isOffendingValue('saturation') }"
+        formControlName="saturation" />
+      <span
+        id="saturation-warning"
+        *ngIf="isOffendingValue('saturation')"
+        class="warning"
+        >{{ "VALUE_INCORRECT_WARNING" | translate }}</span
+      >
+    </div>
+
+    <div class="block">
+      <label for="saturation-pulse">{{ "SATURATION_PULSE" | translate }}</label>
+
+      <input
+        id="saturation-pulse"
+        name="saturation-pulse"
+        type="number"
+        step="1"
+        [ngClass]="{ warning: isOffendingValue('pulse') }"
+        formControlName="pulse" />
+      <span
+        id="pulse-warning"
+        *ngIf="isOffendingValue('pulse')"
+        class="warning"
+        >{{ "VALUE_INCORRECT_WARNING" | translate }}</span
+      >
+    </div>
+  </fieldset>
+</form>

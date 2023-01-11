@@ -1,0 +1,45 @@
+<form [formGroup]="nodeForm" (ngSubmit)="onSubmit()">
+  <!-------------------------- Template from: IONodeText.html -------------------------->
+  <div *ngFor="let label of labels; let i = index" class="center-div">
+    <h2 class="line-wrap text-element" [innerHtml]="label | safe: 'html'"></h2>
+  </div>
+
+  <!-------------------------- Template from: IONodeTextInput.html -------------------------->
+  <fieldset
+    formArrayName="textInputControls"
+    *ngFor="let textInput of textInputs; let i = index"
+    class="questionnaire-fields">
+    <div class="block">
+      <label [for]="textInput.name" style="display: block">{{
+        textInput.label
+      }}</label>
+      <textarea
+        id="textInput.name"
+        name="textInput.name"
+        [formControlName]="i"
+        style="display: block"
+        rows="8"
+        autocomplete="off"
+        maxlength="1800"
+        type="textInput.type"
+        focusOnLoad></textarea>
+    </div>
+  </fieldset>
+  <!-------------------------- Template from: IONodeInput.html -------------------------->
+  <fieldset
+    formArrayName="inputControls"
+    *ngFor="let input of inputs; let i = index"
+    class="questionnaire-fields">
+    <div class="block">
+      <label [for]="input.name">{{ input?.label }}</label>
+      <input
+        [id]="input?.name"
+        [name]="input?.name"
+        [formControlName]="i"
+        [type]="input?.type"
+        [step]="input?.step"
+        autocomplete="off"
+        focusOnLoad />
+    </div>
+  </fieldset>
+</form>

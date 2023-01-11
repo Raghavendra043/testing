@@ -1,0 +1,105 @@
+.notification {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  width: fit-content;
+  margin: 0.5em auto;
+  min-height: 3em;
+  font-size: 1.2em;
+  padding: 0.1em 0.6em 0.1em 0.1em;
+  border-radius: 5px;
+
+  background-color: @notification-background-color;
+  word-break: break-word;
+  hyphens: auto;
+  .apply-subtle-shadow();
+}
+
+.notification-list {
+  display: flex;
+  flex-direction: column;
+
+  li{
+    width: fit-content;
+    margin-left: 0.5em;
+    font-size: 1em;
+    padding: 0.1em 0.6em 0.1em 0.1em;
+  }
+}
+
+.notification_icon {
+  padding-left: 0.35em;
+  padding-right: 0.4em;
+  font-size: 1.5em;
+}
+
+.error {
+  .apply-border(@notification-error-text-color);
+  color: @notification-error-text-color;
+
+  span {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+  }
+}
+
+.info {
+  .apply-border(@notification-info-text-color);
+  color: @notification-info-text-color;
+
+  span {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+  }
+}
+
+div.warning {
+  .apply-border(@notification-warning-text-color);
+  color: @notification-warning-text-color;
+
+  span {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+  }
+}
+
+// Progress bars
+
+.progress {
+  .apply-border(@notification-progress-text-color);
+  color: @notification-progress-text-color;
+}
+
+#progress-container {
+  width: 100%;
+  margin-top: 0.35em;
+}
+
+#progress-label {
+  text-align: left;
+  font-size: 1em;
+  color: @notification-progress-text-color;
+}
+
+progress {
+  margin-top: 0.5em;
+  margin-bottom: 0.6em;
+  width: 100%;
+  background-color: lighten(@notification-progress-text-color, 30%);
+}
+
+progress::-webkit-progress-bar {
+  background-color: lighten(@notification-progress-text-color, 30%);
+}
+
+progress::-webkit-progress-value {
+  background-color: @notification-progress-text-color;
+}
+
+progress::-moz-progress-bar {
+  background-color: @notification-progress-text-color;
+}
+
+.space-before {
+  margin-top: 1em;
+}

@@ -1,0 +1,25 @@
+<form [formGroup]="nodeForm" (ngSubmit)="onSubmit()">
+  <div class="center-div">
+    <h2 class="line-wrap text-element">{{ node.question }}</h2>
+  </div>
+
+  <fieldset class="questionnaire-fields">
+    <div>
+      <ul class="radio-list">
+        <li
+          class="narrow-row list-unstyled"
+          *ngFor="let choice of choices; let i = index">
+
+          <input
+            id="radio-{{ i }}"
+            name="selectedIndex"
+            type="radio"
+            formControlName="selectedIndex"
+            [value]="i" />
+
+          <label for="radio-{{ i }}" class="radio-label">{{ choice.text }}</label>
+        </li>
+      </ul>
+    </div>
+  </fieldset>
+</form>

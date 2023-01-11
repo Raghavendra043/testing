@@ -1,0 +1,23 @@
+<div class="container">
+  <header-menu
+    [title]="'MY_MEASUREMENTS_TITLE'"
+    [showBackBtn]="true"></header-menu>
+
+  <loading-state
+    [stateModel]="model.state"
+    [hasNoData]="model.measurementRefs.length === 0"
+    [noDataMessage]="'MY_MEASUREMENTS_NO_MEASUREMENTS'"
+    [loadingMessage]="'MY_MEASUREMENTS_LOADING'"
+    [failedMessage]="'MY_MEASUREMENTS_FAILED'"></loading-state>
+
+  <nav class="content">
+    <a
+      *ngFor="let measurementRef of model.measurementRefs; index as i"
+      (click)="showMeasurement(i)"
+      id="{{ measurementRef.name }}"
+      class="list_item normal_list_item">
+      <span class="before-icon">{{ measurementRef.name | translate }}</span>
+      <i aria-hidden="true" class="icon {{ measurementRef.icon }}"></i>
+    </a>
+  </nav>
+</div>

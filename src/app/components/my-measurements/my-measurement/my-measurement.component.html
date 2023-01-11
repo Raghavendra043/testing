@@ -1,0 +1,295 @@
+<div class="container">
+  <header-menu
+    [title]="model.measurementRef.name!"
+    [showBackBtn]="true"
+    [showHomeBtn]="model.hasOtherMeasurements"></header-menu>
+
+  <div class="content">
+    <div id="data_range_selectors">
+      <div
+        *ngFor="let filter of model.filters"
+        class="data_range_selector"
+        [ngClass]="{
+          selected_data_range_selector: filter.filter === model.filter
+        }"
+        (click)="showFilter(filter.filter)">
+        {{ filter.label | translate }}
+      </div>
+    </div>
+
+    <loading-state
+      [stateModel]="model.state"
+      [hasNoData]="model.hasNoMeasurements"
+      [noDataMessage]="'NO_MEASUREMENTS_AVAILABLE'"
+      [loadingMessage]="'MY_MEASUREMENTS_LOADING'"
+      [failedMessage]="'MY_MEASUREMENTS_FAILED'"></loading-state>
+
+    <div id="graphs_and_table" *ngIf="model.state === 'Loaded'">
+      <div *ngIf="model.graph" class="graph_wrapper">
+        <canvas
+          baseChart
+          [type]="model.graph.type"
+          [data]="model.graph.data"
+          [options]="model.graph.options">
+        </canvas>
+      </div>
+
+      <div *ngIf="model.graphStandardDay" class="graph_wrapper">
+        <canvas
+          baseChart
+          [type]="model.graphStandardDay.type"
+          [data]="model.graphStandardDay.data"
+          [options]="model.graphStandardDay.options">
+        </canvas>
+      </div>
+
+      <div class="my_results_table">
+        <table id="single-value-table"
+               *ngIf="model.table && model.table.kind === 'singleColumn'">
+
+          <thead>
+            <tr>
+              <th>{{ "TIMESTAMP" | translate }}</th>
+              <th>
+                {{ model.table.options.unit | translate }}
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr
+              id="measurement-item"
+              *ngFor="let tableDatum of model.table.data"
+              (click)="showPopup(tableDatum)">
+              <td>{{ tableDatum.timestamp | amDateFormat: model.table.options.dateFormat }}</td>
+
+              <td>
+                <span class="severity-and-comment">
+                  <i [ngClass]="tableDatum.severity | severity: shouldShowSeverity" class="fas fa-circle"></i>
+                  <span class="comment-icon"
+                        [ngClass]="{ 'hide-comment-icon': !tableDatum.comment }">
+                    <i class="fal fa-sticky-note"></i>
+                  </span>
+                </span>
+                <span class="measurement-table-value">
+                  {{ model.table.options.numberFormat ? (tableDatum.value | number: model.table.options.numberFormat) : tableDatum.value }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <table id="multi-value-table"
+               *ngIf="model.table && model.table.kind === 'multiColumn'">
+          <thead>
+            <tr>
+              <th>{{ "TIMESTAMP" | translate }}</th>
+              <th style="width: 2em"></th>
+              <th *ngFor="let unit of model.table.options.units">{{ unit | translate }}</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr id="measurement-item"
+                *ngFor="let tableDatum of model.table.data"
+                (click)="showPopup(tableDatum)">
+              <td>{{  tableDatum.timestamp | amDateFormat: model.table.options.dateFormat }}</td>
+
+              <td>
+                <span class="comment-icon"
+                      [ngClass]="{ 'hide-comment-icon': !tableDatum.comment }">
+                  <i class="fal fa-sticky-note"></i>
+                </span>
+              </td>
+
+              <td *ngFor="let valueAndSeverity of tableDatum.values; index as i">
+                <span class="severity-and-comment">
+                  <i aria-hidden="true"
+                     [ngClass]="valueAndSeverity.severity | severity"
+                     class="fas fa-circle"></i>
+                </span>
+                <span class="measurement-table-value">
+                  {{ valueAndSeverity.value | number: model.table.options.numberFormats[i] }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td></td>
+              <td></td>
+              <td *ngFor="let unit of model.table.options.units"></td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <table
+          id="standard-day-table"
+          class="my_results_table"
+          *ngIf="model.tableStandardDay">
+          <thead>
+            <tr>
+              <th>{{ "DATE" | translate }}</th>
+              <th>
+                {{ "1970-01-01T00:00:00" | amDateFormat: "LT" }}-{{ "1970-01-01T04:59:00" | amDateFormat: "LT" }}
+              </th>
+              <th>
+                {{ "1970-01-01T05:00:00" | amDateFormat: "LT" }}-{{ "1970-01-01T10:59:00" | amDateFormat: "LT" }}
+              </th>
+              <th>
+                {{ "1970-01-01T11:00:00" | amDateFormat: "LT" }}-{{ "1970-01-01T16:59:00" | amDateFormat: "LT" }}
+              </th>
+              <th>
+                {{ "1970-01-01T17:00:00" | amDateFormat: "LT" }}-{{ "1970-01-01T23:59:00" | amDateFormat: "LT" }}
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr id="measurement-date-item"
+                *ngFor="let measurementDate of model.tableStandardDay.measurementDates">
+              <td>{{ measurementDate.date | amDateFormat: "ll" }}</td>
+
+              <td>
+                <div *ngFor="let tableDatum of measurementDate.night">
+                  <div (click)="showPopup(tableDatum)">
+                    <span class="severity-and-comment">
+                      <i
+                        aria-hidden="true"
+                        [ngClass]="severity(tableDatum.severity)"
+                        class="fas fa-circle"></i>
+                      <span
+                        class="comment-icon"
+                        [ngClass]="{ 'hide-comment-icon': !tableDatum.comment }">
+                        <i class="fal fa-sticky-note"></i>
+                      </span>
+                    </span>
+                    <span [innerHTML]="tableDatum.value | number: '1.1-1' | constraintColor: tableDatum.constraint"></span>
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <div *ngFor="let tableDatum of measurementDate.morning">
+                  <div (click)="showPopup(tableDatum)">
+                    <span class="severity-and-comment">
+                      <i
+                        aria-hidden="true"
+                        [ngClass]="severity(tableDatum.severity)"
+                        class="fas fa-circle"></i>
+                      <span
+                        class="comment-icon"
+                        [ngClass]="{ 'hide-comment-icon': !tableDatum.comment }">
+                        <i class="fal fa-sticky-note"></i>
+                      </span>
+                    </span>
+                    <span [innerHTML]="tableDatum.value | number: '1.1-1' | constraintColor: tableDatum.constraint"></span>
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <div *ngFor="let tableDatum of measurementDate.afternoon">
+                  <div (click)="showPopup(tableDatum)">
+                    <span class="severity-and-comment">
+                      <i
+                        aria-hidden="true"
+                        [ngClass]="severity(tableDatum.severity)"
+                        class="fas fa-circle"></i>
+                      <span
+                        class="comment-icon"
+                        [ngClass]="{ 'hide-comment-icon': !tableDatum.comment }">
+                        <i class="fal fa-sticky-note"></i>
+                      </span>
+                    </span>
+                    <span [innerHTML]="tableDatum.value | number: '1.1-1' | constraintColor: tableDatum.constraint"></span>
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <div *ngFor="let tableDatum of measurementDate.evening">
+                  <div (click)="showPopup(tableDatum)">
+                    <span class="severity-and-comment">
+                      <i
+                        aria-hidden="true"
+                        [ngClass]="severity(tableDatum.severity)"
+                        class="fas fa-circle"></i>
+                      <span
+                        class="comment-icon"
+                        [ngClass]="{ 'hide-comment-icon': !tableDatum.comment }">
+                        <i class="fal fa-sticky-note"></i>
+                      </span>
+                    </span>
+                    <span [innerHTML]="tableDatum.value | number: '1.1-1' | constraintColor: tableDatum.constraint"></span>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+
+          <tfoot>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div
+    class="light-box-dimmer"
+    (click)="hidePopup()"
+    *ngIf="model.popupMeasurement">
+    <div id="light-box" class="light-box">
+      <h3>{{ "MEASUREMENT_TITLE" | translate }}</h3>
+
+      <table class="measurement-info-table">
+        <tr>
+          <td class="row-header">{{ "TIMESTAMP" | translate }}:</td>
+          <td>
+            {{ model.popupMeasurement.timestamp | amDateFormat: "LLL" }}
+          </td>
+        </tr>
+
+        <tr *ngIf="model.popupMeasurement.kind === 'singleValue'">
+          <td class="row-header">{{ "VALUE" | translate }}:</td>
+          <td>
+            {{ model.popupMeasurement.constraint | constraintText }} {{ model.popupMeasurement.value }}
+          </td>
+        </tr>
+
+        <tr *ngIf="model.popupMeasurement.kind === 'multiValue'">
+          <td class="row-header">{{ "VALUE" | translate }}:</td>
+          <td>
+            {{ model.popupMeasurement.values.join(", ") }}
+          </td>
+        </tr>
+
+        <tr *ngIf="model.popupMeasurement.comment">
+          <td class="row-header">{{ "COMMENT" | translate }}:</td>
+          <td>{{ model.popupMeasurement.comment }}</td>
+        </tr>
+      </table>
+
+      <div id="action-buttons" class="flex-column">
+        <button class="footer-button center-button" (click)="hidePopup()">
+          {{ "CLOSE" | translate }}
+          <i aria-hidden="true" class="icon fas fa-times-circle"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

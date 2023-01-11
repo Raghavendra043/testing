@@ -1,0 +1,104 @@
+/* lists.less */
+.flex_list {
+  display: flex;
+  flex-direction: column;
+}
+
+.list_item {
+  display: flex;
+  justify-content: center;
+
+  padding: 0.75em 0.5em;
+  margin: 0.5em;
+
+  border: solid;
+  border-radius: 0.3em;
+  box-sizing: content-box;
+
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-decoration: none;
+
+  span {
+    flex-grow: 1;
+  }
+
+  .icon {
+    font-size: 1.4em;
+  }
+}
+
+.normal_list_item {
+  .apply-background-color-and-border(@normal-list-item-color);
+  color: @secondary-color;
+  .apply-subtle-shadow();
+}
+
+.normal_list_item:hover {
+  .apply-highlight-animation(color-fade-normal, @normal-list-item-color);
+}
+
+.important_list_item {
+  .apply-background-color-and-border(@important-list-item-color);
+  color: @normal-list-item-color;
+  .apply-subtle-shadow();
+}
+.important_list_item:hover {
+  .apply-highlight-animation(color-fade-important, @important-list-item-color);
+}
+
+.result-date {
+  font-size: 0.8em;
+  color: @primary-color;
+}
+
+.condensed_list_item {
+  padding: 0.5em;
+}
+
+.questionnaire_list_item_container {
+}
+
+.questionnaire_list_item {
+  display: block;
+  width: 100%;
+  font-size: 0.95em;
+}
+
+.schedule_window_indicator {
+  display: block;
+  width: 100%;
+  padding-top: 0.25em;
+  font-size: 0.75em;
+}
+
+// Acknowledgements
+.acknowledgements_list {
+  margin-top: 0.75em;
+}
+
+.acknowledgement_list_item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 1em auto;
+  width: 85%;
+  padding: 0.5em;
+
+  border: 0px solid transparent;
+  border-radius: 0.3em;
+  .apply-subtle-shadow();
+
+  background-color: @neutral-color;
+  color: @primary-color;
+
+  p {
+    margin: 0;
+    font-size: 1.2em;
+  }
+
+  .icon {
+    margin-right: 0.5em;
+    font-size: 2em;
+  }
+}

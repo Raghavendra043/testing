@@ -1,0 +1,85 @@
+<div class="container">
+  <header-menu
+    [showBackBtn]="true"
+    [showHomeBtn]="model.hasOtherThreads"
+    [title]="model.title"></header-menu>
+
+  <loading-state
+    [stateModel]="model.state"
+    [hasNoData]="model.messages.length === 0"
+    [noDataMessage]="'MESSAGES_NO_MESSAGES'"
+    [loadingMessage]="'MESSAGES_LOADING'"
+    [failedMessage]="'MESSAGES_FAILED'"></loading-state>
+
+  <notifications
+    [info]="model.notifications.info"
+    [error]="model.notifications.error"></notifications>
+
+  <div class="content" style="display: flex; flex-direction: column-reverse">
+    <div id="messages">
+      <div
+        class="message"
+        *ngFor="let message of model.messages; trackBy: messageByTimestamp"
+        [ngClass]="{
+          from_clinician: message.sender.type === 'organization',
+          from_patient: message.sender.type === 'patient',
+          unread: message.isRead === false
+        }"
+        id="message-{{ message.timestamp }}">
+        <span class="message_header">
+          {{ message.sender.name }},
+          {{ message.timestamp | amDateFormat: "D MMM" }},
+          {{ message.timestamp | amDateFormat: "LT" }}
+        </span>
+
+        <div>
+          <p [innerHtml]="message.body | clickableLinks"></p>
+        </div>
+
+        <thread-image
+          *ngFor="
+            let attachment of message.links?.attachments;
+            trackBy: attachmentByFull
+          "
+          [fullImageUrl]="attachment.full"
+          [thumbnailUrl]="attachment.thumbnail"
+          [showDelete]="message.sender.type === 'patient'"
+          (delete)="refresh()">
+        </thread-image>
+      </div>
+    </div>
+  </div>
+
+  <div id="char-count">
+    <span>
+      {{ 1800 - model.newMessage.length }}
+      {{ "MESSAGES_CHARACTERS_LEFT" | translate }}
+    </span>
+  </div>
+
+  <form
+    #newMessageForm="ngForm"
+    id="write_message"
+    (ngSubmit)="submit()"
+    name="newMessageForm">
+    <textarea
+      type="textarea"
+      name="message"
+      placeholder="{{ 'MESSAGES_FORM_MESSAGE' | translate }}"
+      [(ngModel)]="model.newMessage"
+      #newMessage="ngModel"
+      maxlength="1800"></textarea>
+
+    <image-picker
+      class="image-picker-component"
+      [(filePreviews)]="model.filePreviews"></image-picker>
+
+    <div id="send-container" [ngClass]="{ disabled: !isValid() }">
+      <button id="submit" type="submit" [disabled]="!isValid()">
+        <i *ngIf="!model.isSending" class="fas fa-paper-plane icon"></i>
+        <i *ngIf="model.isSending" class="fa fa-spin fa-spinner fa"></i>
+        {{ "MESSAGES_SEND" | translate }}
+      </button>
+    </div>
+  </form>
+</div>

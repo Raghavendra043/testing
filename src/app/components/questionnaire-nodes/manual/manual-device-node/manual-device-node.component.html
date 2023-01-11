@@ -1,0 +1,28 @@
+<form [formGroup]="nodeForm" (ngSubmit)="onSubmit()">
+  <div class="center-div">
+    <h2 class="line-wrap text-element">{{ node.text }}</h2>
+  </div>
+
+  <fieldset
+    formArrayName="inputControls"
+    *ngFor="let input of inputs; let i = index"
+    class="questionnaire-fields">
+    <div>
+      <label [for]="input.nodeTypeName">{{  input.translationId | translate }}</label>
+
+      <input
+        [id]="input.nodeTypeName"
+        [name]="input.nodeTypeName"
+        type="number"
+        [step]="input.formStep"
+        autocomplete="off"
+        [formControlName]="i"
+        [ngClass]="{ warning: isOffendingValue(input.nodeTypeName) }"
+        focusOnLoad />
+      <span
+        id="input.nodeTypeName"
+        *ngIf="isOffendingValue(input.nodeTypeName)"
+        class="warning">{{ "VALUE_INCORRECT_WARNING" | translate }}</span>
+    </div>
+  </fieldset>
+</form>

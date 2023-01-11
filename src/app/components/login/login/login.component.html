@@ -1,0 +1,105 @@
+<div class="container">
+  <header-menu [showLogo]="true"></header-menu>
+
+  <div class="content space_between">
+    <form
+      #loginForm="ngForm"
+      (ngSubmit)="submit()"
+      id="login-form"
+      class="login_form"
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="off"
+      *ngIf="model.showLoginForm"
+      [ngClass]="{ padding_when_notification: model.error }">
+      <div class="notification error" *ngIf="model.error">
+        <i class="notification_icon fas fa-exclamation-triangle"></i>
+        {{ model.error | translate }}
+      </div>
+      <div id="login-info" class="notification info" *ngIf="model.info">
+        <i class="notification_icon fas fa-info-circle"></i>
+        {{ model.info | translate }}
+      </div>
+
+      <div class="fill">
+        <div id="input-container">
+          <div
+            class="login_input"
+            [ngClass]="{ warning: !username.valid && !username.pristine }">
+            <i
+              class="fal fa-user"
+              [ngClass]="{
+                warning: !username.valid && !username.pristine
+              }"></i>
+            <input
+              id="username"
+              required
+              focusOnLoad
+              name="username"
+              [(ngModel)]="model.username"
+              #username="ngModel"
+              type="text"
+              placeholder="{{ 'LOGIN_FORM_USERNAME' | translate }}"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off" />
+          </div>
+
+          <div
+            class="login_input"
+            [ngClass]="{ warning: !password.valid && !password.pristine }">
+            <i
+              class="fal fa-lock-alt"
+              [ngClass]="{
+                warning: !password.valid && !password.pristine
+              }"></i>
+            <input
+              id="password"
+              name="password"
+              required
+              [(ngModel)]="model.password"
+              #password="ngModel"
+              class="password"
+              type="text"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              placeholder="{{ 'LOGIN_FORM_PASSWORD' | translate }}" />
+          </div>
+
+          <div class="button_container">
+            <button
+              type="submit"
+              [disabled]="!loginForm.form.valid || model.state === 'Loading'">
+              {{
+                model.state !== "Loading"
+                  ? ("LOGIN_LOGIN_BUTTON" | translate)
+                  : ""
+              }}
+              <i
+                *ngIf="model.state === 'Loading'"
+                class="fa fa-spinner fa-spin">
+              </i>
+            </button>
+          </div>
+        </div>
+
+        <div id="info-box-container">
+          <label for="remember-me">
+            {{ "LOGIN_FORM_REMEMBER_ME" | translate }}
+          </label>
+          <input
+            id="remember-me"
+            name="rememberMe"
+            [(ngModel)]="model.rememberMe"
+            #rememberMe="ngModel"
+            type="checkbox" />
+
+          <div id="disclaimer-text" *ngIf="model.rememberMe">
+            {{ "LOGIN_FORM_REMEMBER_ME_DISCLAIMER" | translate }}
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

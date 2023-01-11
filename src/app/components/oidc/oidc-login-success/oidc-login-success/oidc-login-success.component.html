@@ -1,0 +1,22 @@
+<div class="container">
+  <header-menu [showLogo]="true"></header-menu>
+
+  <div class="content space_between">
+    <div class="notification error" *ngIf="errorMessage">
+      <i class="notification_icon fas fa-exclamation-triangle"></i>
+      <span>{{ errorMessage | translate }}</span>
+    </div>
+    
+    <div class="fill">
+      <div id="input-container">
+        <input
+          id="oidc-retry"
+          type="submit"
+          value="{{ 'OIDC_LOGIN_FAILED_BUTTON_TEXT' | translate }}"
+          *ngIf="errorMessage"
+          (click)="goBackToLogin()"
+          class="list_item confirm-btn" />
+      </div>
+    </div>
+  </div>
+</div>

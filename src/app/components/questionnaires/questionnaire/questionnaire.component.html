@@ -1,0 +1,159 @@
+<div class="container">
+  <header-menu
+    [showBackBtn]="true"
+    [onBackFun]="goBack"
+    [showHomeBtn]="true"
+    [onHomeFun]="goHome"
+    [title]="model.title"></header-menu>
+
+  <loading-state
+    [stateModel]="model.state"
+    [hasNoData]="false"
+    [noDataMessage]="''"
+    [loadingMessage]="'QUESTIONNAIRE_LOADING'"
+    [failedMessage]="'QUESTIONNAIRE_FAILED'"></loading-state>
+
+  <div class="content">
+    <div *ngIf="model.state === 'Failed' && model.error">
+      <h2 class="line-wrap text-element">
+        {{ "OPENTELE_RUNTIME_ERROR" | translate }}
+      </h2>
+      <h3 class="line-wrap text-element">
+        {{ model.error }}
+      </h3>
+    </div>
+
+    <form
+      #nodeForm="ngForm"
+      id="nodeForm"
+      name="nodeForm"
+      class="questionnaire_form"
+      (ngSubmit)="model.submitNodeForm()">
+      <button
+        id="help-button"
+        type="button"
+        class="button help-button"
+        *ngIf="model.showHelpMenuIcon"
+        (click)="model.showHideHelpMenu()">
+        <i aria-hidden="true" class="fal fa-question-circle"></i>
+      </button>
+
+      <div id="questionnaire_content" class="questionnaire_content">
+        <ng-template nodeHost></ng-template>
+      </div>
+    </form>
+
+    <div
+      id="help-menu"
+      class="overlay space_between"
+      *ngIf="model?.helpMenu?.visible">
+      <div id="help-content">
+        <h1 id="help-heading">{{ "HELP_INFO" | translate }}</h1>
+
+        <object
+          data="../../images/image-loader.svg"
+          type="image/svg+xml"
+          *ngIf="
+            model.helpMenu?.image && model.helpMenu?.imageLoaded === false
+          "></object>
+
+        <img
+          id="help-image"
+          [src]="model.helpMenu.imageSrc"
+          alt="{{ 'QUESTIONNAIRE_HELP_IMAGE_ARIA' | translate }}"
+          *ngIf="
+            model.helpMenu?.image && model.helpMenu?.imageLoaded === true
+          " />
+
+        <div
+          id="help-text"
+          class="center-div"
+          *ngIf="model?.helpMenu?.text"
+          [innerHTML]="model.helpMenu.text"></div>
+      </div>
+
+      <div id="footer" class="flex-column">
+        <button
+          id="help-ok-button"
+          type="button"
+          class="footer-button center-button"
+          (click)="model.showHideHelpMenu()">
+          {{ "OK" | translate }}
+          <i aria-hidden="true" class="icon fas fa-check-circle"></i>
+        </button>
+      </div>
+    </div>
+
+    <div
+      id="comment-prompt"
+      class="overlay space_between"
+      *ngIf="model?.commentPrompt?.visible">
+      <div id="comment-content">
+        <div>
+          <h1 id="comment-heading">{{ "COMMENT" | translate }}</h1>
+        </div>
+        <h1>{{ "COMMENT_PROMPT_INFO" | translate }}</h1>
+
+        <div id="comment-field">
+          <textarea
+            id="measurement-comment"
+            name="measurement-comment"
+            max-length="300"
+            [(ngModel)]="model.commentPrompt.text"
+            #comment="ngModel"></textarea>
+        </div>
+      </div>
+
+      <div id="footer" class="flex-column">
+        <button
+          id="comment-ok-button"
+          type="button"
+          class="footer-button center-button"
+          (click)="model.commentPrompt.confirm()">
+          {{ "OK" | translate }}
+          <i aria-hidden="true" class="icon fas fa-check-circle"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer" class="flex-column">
+    <button
+      id="question-left-button"
+      class="footer-button left-button"
+      *ngIf="model.leftButton.show"
+      [disabled]="model.leftButton.validate && !model.leftButton.validate(this)"
+      (click)="model.leftButton.click?.(this)">
+      {{ model.leftButton.text | translate }}
+      <i aria-hidden="true" class="icon fas fa-times-circle"></i>
+    </button>
+
+    <button
+      id="question-center-button"
+      class="footer-button center-button"
+      type="submit"
+      form="nodeForm"
+      *ngIf="model.centerButton.show"
+      [disabled]="
+        model.centerButton.validate && !model.centerButton.validate(this)
+      "
+      (click)="model.rightButton.click?.(this)">
+      {{ model.centerButton.text | translate }}
+      <i aria-hidden="true" class="icon fas fa-arrow-circle-right"></i>
+    </button>
+
+    <button
+      id="question-right-button"
+      class="footer-button right-button"
+      type="submit"
+      *ngIf="model.rightButton.show"
+      [disabled]="
+        (model.rightButton.validate && !model.rightButton.validate(this)) ||
+        model.confirmTimeout
+      "
+      (click)="model.rightButton.click?.(this)">
+      {{ model.rightButton.text | translate }}
+      <i aria-hidden="true" class="icon fas fa-check-circle"></i>
+    </button>
+  </div>
+</div>

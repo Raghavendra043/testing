@@ -1,0 +1,11 @@
+{
+  "discoveryComment": "https://demo.duendesoftware.com/connect/.well-known/openid-configuration",
+  "authorizationEndpoint": "https://demo.duendesoftware.com/",
+  "endSessionEndpoint": "https://demo.duendesoftware.com/connect/endsession",
+  "clientId": "interactive.public",
+  "redirectUri": "http://localhost:8000/client-citizen/",
+  "postLogoutRedirectUri": "http://localhost:8000/client-citizen/",
+  "invalidateSsoSession": false,
+  "scopes": "openid profile email api offline_access",
+  "enabled": true
+}

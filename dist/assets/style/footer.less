@@ -1,0 +1,65 @@
+.footer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.footer-button {
+  flex-grow: 1;
+  margin: 0.2em;
+  padding: 2px;
+  display: block;
+
+  font-family: Lato;
+  font-size: 1.7em;
+  color: @background-color;
+  letter-spacing: 1px;
+
+  border: 2px solid transparent;
+  border-radius: 5px;
+}
+
+.left-button {
+  margin-right: 0.25em;
+
+  border-color: darken(@cancel-button-color, 10%);
+  background-color: @cancel-button-color;
+  .apply-subtle-shadow();
+}
+.left-button:enabled:hover {
+  .apply-highlight-animation(color-fade-left-button, @cancel-button-color);
+}
+.left-button:disabled {
+  border-color: darken(@disabled-button-color, 10%);
+  background-color: @disabled-button-color;
+}
+
+.center-button {
+  border-color: darken(@ok-button-color, 10%);
+  background-color: @ok-button-color;
+  .apply-subtle-shadow();
+}
+.center-button:enabled:hover {
+  .apply-highlight-animation(color-fade-center-button, @ok-button-color);
+}
+.center-button:disabled {
+  border-color: darken(@disabled-button-color, 10%);
+  background-color: @disabled-button-color;
+}
+
+.right-button {
+  margin-left: 0.25em;
+
+  border-color: darken(@ok-button-color, 10%);
+  background-color: @ok-button-color;
+  .apply-subtle-shadow();
+}
+.right-button:enabled:hover {
+  .apply-highlight-animation(color-fade-right-button, @ok-button-color);
+}
+.right-button:disabled {
+  border-color: darken(@disabled-button-color, 10%);
+  background-color: @disabled-button-color;
+}

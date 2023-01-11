@@ -1,0 +1,28 @@
+<div class="container">
+  <header-menu [showBackBtn]="true" [title]="'MESSAGES_TITLE'"></header-menu>
+
+  <loading-state
+    [stateModel]="model.state"
+    [hasNoData]="model.departments.length === 0"
+    [noDataMessage]="'MESSAGES_NO_THREADS'"
+    [loadingMessage]="'MESSAGES_LOADING'"
+    [failedMessage]="'MESSAGES_FAILED'"></loading-state>
+
+  <nav class="content">
+    <a
+      *ngFor="let department of model.departments; index as i"
+      (click)="showMessageThread(i)"
+      [ngClass]="{
+        important_list_item: department.unreadCount,
+        normal_list_item: !department.unreadCount
+      }"
+      class="list_item">
+      <span>
+        {{ department.name }}
+        {{
+          department.unreadCount > 0 ? "(" + department.unreadCount + ")" : ""
+        }}
+      </span>
+    </a>
+  </nav>
+</div>

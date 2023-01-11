@@ -1,0 +1,25 @@
+<form [formGroup]="nodeForm" (ngSubmit)="onSubmit()">
+  <div class="center-div">
+    <h2 class="line-wrap text-element">{{ node.text }}</h2>
+  </div>
+  <fieldset class="questionnaire-fields">
+    <div>
+      <ul>
+        <li
+          class="narrow-row list-unstyled"
+          *ngFor="let input of inputs; let i = index">
+          <input
+            id="radio-{{ i }}"
+            type="radio"
+            name="enum"
+            formControlName="enum"
+            value="{{ i }}" />
+
+          <label for="radio-{{ i }}" class="radio-label">
+            {{ input.level | translate }}<br
+          /></label>
+        </li>
+      </ul>
+    </div>
+  </fieldset>
+</form>

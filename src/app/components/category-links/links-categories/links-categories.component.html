@@ -1,0 +1,20 @@
+<div class="container">
+  <header-menu [showBackBtn]="true" [title]="'LINKS_TITLE'"></header-menu>
+
+  <loading-state
+    [stateModel]="model.state"
+    [hasNoData]="model.categories?.length == 0"
+    [noDataMessage]="'LINKS_CATEGORIES_NO_LINKS_CATEGORIES'"
+    [loadingMessage]="'LINKS_CATEGORIES_LOADING'"
+    [failedMessage]="'LINKS_CATEGORIES_FAILED'"></loading-state>
+
+  <nav class="content">
+    <a
+      *ngFor="let categoryRef of model.categories; index as i"
+      [ngClass]="{ 'marked-button': categoryRef.marked }"
+      (click)="showCategory(i)"
+      class="list_item normal_list_item">
+      <span>{{ categoryRef.name }}</span>
+    </a>
+  </nav>
+</div>
